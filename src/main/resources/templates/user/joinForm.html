@@ -23,11 +23,15 @@
             </div>
             <form method="post" name="joinForm" action="/joinForm">
             <div class="form">
+<!--                <div id="userData">-->
                 <input type="hidden" name="userMainSkill" class="userMainSkill">
                 <input type="hidden" name="userMainDetail" class="userMainDetail">
                 <input type="hidden" name="userMainLevel" class="userMainLevel">
                 <input type="hidden" name="userCode" th:value="${userCode}">
                 <input type="hidden" name="userImgName" th:value="${userProfileURL}">
+<!--                <input type="file" id="input" name="userImgName" class="userImgBait" th:value="${userProfileURL}">-->
+<!--                </div>-->
+
                 <ul class="firstSignForm">
                     <li class="firstLi">
                         <label>이메일</label>
@@ -140,5 +144,49 @@
         $(".userMainLevel").val($("#userMainLevel").val());
         document.joinForm.submit();
     })
+
+    //-------------------------------------------------------------------------------------------- 카카오 프로필 이미지 uuid 시도중
+    // console.log(document.getElementById('input').files[0]);
+    // console.log($('input#input')[0].files[0]);
+    // console.log($('input#input')[0].files[0].value());
+
+    // $(document).ready(function () {
+    //     function imgUpload() {
+    //         let inputFile = $("input[name='userImgName']");
+    //         let files = e.target.files;
+    //         let formData = new FormData();
+    //         formData.append("uploadFile", inputFile.files[0]);
+    //         console.log(document.getElementById('input').files[0]);
+    //         // console.log(inputFile.files[0]);
+    //         $.ajax({
+    //             url: "/uploadAjaxAction",
+    //             data: formData,
+    //             type: "POST",
+    //             // 현재 설정된 헤더 설정을 기본 방식으로 변경하지 못하도록 false로 설정
+    //             processData: false,
+    //             contentType: false,
+    //             success: function (result) {
+    //                 showUploadFile(result);
+    //             }
+    //         });
+    //     }
+    //
+    // // console.log(inputFile.files[0]);
+    // imgUpload();
+    //
+    //
+    //     function showUploadFile(uploadResult) {
+    //         let str = "";
+    //         let userImgName = uploadResult.userImgName;
+    //         let userImgPath = uploadResult.userImgPath;
+    //         let userImgUuid = uploadResult.userImgUuid;
+    //
+    //         str += "<input type='hidden' name='userImgName' value='" + userImgName + "'>"
+    //         str += "<input type='hidden' name='userImgPath' value='" + userImgPath + "'>"
+    //         str += "<input type='hidden' name='userImgUuid' value='" + userImgUuid + "'>"
+    //
+    //         $("#userData").append(str);
+    //     }
+    //--------------------------------------------------------------------------------------------
 </script>
 </html>

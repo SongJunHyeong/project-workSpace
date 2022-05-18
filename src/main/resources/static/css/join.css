@@ -164,6 +164,11 @@ div.joinCompleteWrapper{
     text-align: center;
 }
 
+/* 카카오 이미지파일 uuid로 만들기 위한 미끼 역할 */
+/*input.userImgBait{*/
+/*    display: none;*/
+/*}*/
+
 @media (max-width: 414px){
     div.joinWrapper{
         margin: 0px !important;
@@ -202,5 +207,10 @@ div.joinCompleteWrapper{
         text-align: left !important;
         padding-left: 10px !important;
     }
+
+    /* 카카오 이미지파일 uuid로 만들기 위한 미끼 역할 */
+    /*input.userImgBait{*/
+    /*    display: none;*/
+    /*}*/
 
 }
