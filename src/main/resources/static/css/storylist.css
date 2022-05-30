@@ -262,7 +262,7 @@ a{
     color: #696980;
     margin-right: 10px;
     padding-left: 20px;
-    background-image: url(../../static/images/triangle.png);
+    background-image: url('/static/images/triangle.png');
     background-position: 90%;
     background-size: 10px 10px;
     background-repeat: no-repeat;

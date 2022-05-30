@@ -152,7 +152,7 @@ public class KakaoController {
 
         if(userVO == null){
 
-            url = "joinForm";
+            url = "user/joinForm";
 
         }else{
 
@@ -183,6 +183,7 @@ public class KakaoController {
         HttpSession session = req.getSession();
 
         session.setAttribute("userNum", userNum);
+        session.setAttribute("profile", userVO);
 
         return "user/joinSuccess";
     }

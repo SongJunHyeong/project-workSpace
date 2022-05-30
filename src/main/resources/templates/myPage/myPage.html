@@ -59,7 +59,7 @@
 
     <!----------------------------------------------------------------내 정보 수정--------------------------------------------------------------------->
     <section id="info" class="pageNav">
-        <form>
+        <form method="POST" name="userForm" id="frm" action="/modify">
             <div id="infoWrap" class="flex">
                 <div id="top">
 
@@ -69,78 +69,100 @@
                         </label>
                     </div>
                     <label for="thumbNail">
-                        <button id="profileChange"></button>
+                        <button id="profileChange" type="button"></button>
                     </label>
                     <input type="file" name="profileImg" id="thumbNail">
                 </div>
                 <div id="bottom">
                     <div mailWrap>
                         <label>이메일
-                            <input type="text" disabled value="tkdgur1996@gmail.com">
+                            <input type="text" name="userId" th:value="${userVO.getUserId()}">
                         </label>
                     </div>
                     <div id="nickWrap" class="marginBottom">
                         <label>닉네임
-                            <input type="text" class="able" placeholder="3~10자리 이내로 적어주세요!" value="상냥이">
+                            <input type="text"  name="userNickName" class="able" placeholder="3~10자리 이내로 적어주세요!" th:value="${userVO.getUserNickName()}">
                         </label>
-                        <p class="alert">사용 가능합니다.</p>
+<!--                        <p class="alert">사용 가능합니다.</p>-->
                     </div>
                     <div id="phoneWrap" class="marginBottom">
                         <label>휴대폰번호
-                            <input type="text" disabled value="01040625261">
+                            <input type="text" name="userPhone" th:value="${userVO.getUserPhone()}">
                         </label>
-                        <p class="alert">인증완료</p>
+<!--                        <p class="alert">인증완료</p>-->
                     </div>
                     <div id="mainSkill" class="marginBottom">
                         <p>메인 직무/ 상세 직무 / 능력치</p>
                         <div class="flex">
-                            <select class="able first" name="mainSkill" onchange="personChange(this)">
-                                <option value="a">기획</option>
-                                <option value="b">디자인</option>
-                                <option value="c">프론트엔드개발</option>
-                                <option value="d">백엔드개발</option>
-                                <option value="e">사업</option>
-                                <option value="f">기타</option>
+                            <select id="mainSkill2" onchange="personChange(this);">
+                           <option th:selected="${userVO.getUserMainSkill()=='기획'}">기획</option>
+                            <option th:selected="${userVO.getUserMainSkill()=='디자인'}" >디자인</option>
+                           <option th:selected="${userVO.getUserMainSkill()=='프론트엔드개발'}">프론트엔드개발</option>
+                          <option th:selected="${userVO.getUserMainSkill()=='백엔드개발'}">백엔드개발</option>
+                           <option th:selected="${userVO.getUserMainSkill()=='사업'}">사업</option>
+                          <option th:selected="${userVO.getUserMainSkill()=='기타'}">기타</option>
                             </select>
-                            <select class="able second" name="subSkill">
-                                <option>UI/UX 기획</option>
-                                <option>게임 기획</option>
-                                <option>프로젝트 매니저</option>
-                                <option>하드웨어(제품) 기획</option>
+                            <select id="mainDetail2">
+                                <option th:selected="${userVO.getUserMainDetail()=='UI/UX기획'}">UI/UX기획</option>
+                                <option th:selected="${userVO.getUserMainDetail()=='UI/UX기획'}">UI/UX기획</option>
+                                <option th:selected="${userVO.getUserMainDetail()=='게임기획'}">게임기획</option>
+                                <option th:selected="${userVO.getUserMainDetail()=='프로젝트매니저'}">프로젝트매니저</option>
+                                <option th:selected="${userVO.getUserMainDetail()=='하드웨어(제품)기획'}">하드웨어(제품)기획</option>
                             </select>
-                            <select class="able third" name="skillLevel">
-                                <option value="1">초심자</option>
-                                <option value="2">초보</option>
-                                <option value="3">중수</option>
-                                <option value="4">고수</option>
-                                <option value="5">해커</option>
+                            <select id="skillLevel2">
+                                <option th:selected="${userVO.getUserMainLevel()=='초심자'}">초심자</option>
+                                <option th:selected="${userVO.getUserMainLevel()=='초보'}">초보</option>
+                                <option th:selected="${userVO.getUserMainLevel()=='중수'}">중수</option>
+                                <option th:selected="${userVO.getUserMainLevel()=='고수'}">고수</option>
+                                <option th:selected="${userVO.getUserMainLevel()=='구루'}">구루</option>
                             </select>
+<!--                            <select class="able first" id="mainSkill2" onchange="personChange(this)">-->
+<!--&lt;!&ndash;                                <option th:selected="${userVO.getUserMainSkill()=='기획'}">기획</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <option th:selected="${userVO.getUserMainSkill()=='디자인'}" >디자인</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <option th:selected="${userVO.getUserMainSkill()=='프론트엔드개발'}">프론트엔드개발</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <option th:selected="${userVO.getUserMainSkill()=='백엔드개발'}">백엔드개발</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <option th:selected="${userVO.getUserMainSkill()=='사업'}">사업</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <option th:selected="${userVO.getUserMainSkill()=='기타'}">기타</option>&ndash;&gt;-->
+<!--                            </select>-->
+<!--                            <select class="able second" id="mainDetail2">-->
+<!--                                <option th:selected="${userVO.getUserMainDetail()=='UI/UX 기획'}">UI/UX 기획</option>-->
+<!--                                <option th:selected="${userVO.getUserMainDetail()=='게임 기획'}">게임 기획</option>-->
+<!--                                <option th:selected="${userVO.getUserMainDetail()=='프로젝트 매니저'}">프로젝트 매니저</option>-->
+<!--                                <option th:selected="${userVO.getUserMainDetail()=='하드웨어(제품) 기획'}">하드웨어(제품) 기획</option>-->
+<!--                            </select>-->
+<!--                            <select class="able third" id="skillLevel2">-->
+<!--                                <option th:selected="${userVO.getUserMainLevel()=='초심자'}">초심자</option>-->
+<!--                                <option th:selected="${userVO.getUserMainLevel()=='초보'}">초보</option>-->
+<!--                                <option th:selected="${userVO.getUserMainLevel()=='중수'}">중수</option>-->
+<!--                                <option th:selected="${userVO.getUserMainLevel()=='고수'}">고수</option>-->
+<!--                                <option th:selected="${userVO.getUserMainLevel()=='해커'}">해커</option>-->
+<!--                            </select>-->
                         </div>
                     </div>
 
                     <div id="subSkill" class="marginBottom">
                         <p>서브 직무/ 상세 직무 / 능력치</p>
                         <div class="flex">
-                            <select class="able first" name="mainSkill" onchange="personChange(this)">
-                                <option value="a">기획</option>
-                                <option value="b">디자인</option>
-                                <option value="c">프론트엔드개발</option>
-                                <option value="d">백엔드개발</option>
-                                <option value="e">사업</option>
-                                <option value="f">기타</option>
+                            <select class="able first" id="mainSkill3" onchange="personChange(this)">
+                                <option th:selected="${userVO.getUserSubSkill()=='기획'}">기획</option>
+                                <option th:selected="${userVO.getUserSubSkill()=='디자인'}">디자인</option>
+                                <option th:selected="${userVO.getUserSubSkill()=='프론트엔드개발'}">프론트엔드개발</option>
+                                <option th:selected="${userVO.getUserSubSkill()=='백엔드개발'}">백엔드개발</option>
+                                <option th:selected="${userVO.getUserSubSkill()=='사업'}">사업</option>
+                                <option th:selected="${userVO.getUserSubSkill()=='기타'}">기타</option>
                             </select>
-                            <select class="able second" name="subSkill">
-                                <option>UI/UX 기획</option>
-                                <option>게임 기획</option>
-                                <option>프로젝트 매니저</option>
-                                <option>하드웨어(제품) 기획</option>
+                            <select class="able second" id="subSkill3">
+                                <option th:selected="${userVO.getUserSubDetail()=='UI/UX 기획'}">UI/UX 기획</option>
+                                <option th:selected="${userVO.getUserSubDetail()=='게임 기획'}">게임 기획</option>
+                                <option th:selected="${userVO.getUserSubDetail()=='프로젝트 매니저'}">프로젝트 매니저</option>
+                                <option th:selected="${userVO.getUserSubDetail()=='하드웨어(제품) 기획'}">하드웨어(제품) 기획</option>
                             </select>
-                            <select class="able third" name="skillLevel">
-                                <option value="1">초심자</option>
-                                <option value="2">초보</option>
-                                <option value="3">중수</option>
-                                <option value="4">고수</option>
-                                <option value="5">해커</option>
+                            <select class="able third" id="skillLevel3">
+                                <option th:selected="${userVO.getUserSubLevel()=='초심자'}">초심자</option>
+                                <option th:selected="${userVO.getUserSubLevel()=='초보'}">초보</option>
+                                <option th:selected="${userVO.getUserSubLevel()=='중수'}">중수</option>
+                                <option th:selected="${userVO.getUserSubLevel()=='고수'}">고수</option>
+                                <option th:selected="${userVO.getUserSubLevel()=='해커'}">해커</option>
                             </select>
                         </div>
                     </div>
@@ -148,12 +170,12 @@
                     <div id="price" class="marginBottom">
                         <p>대화 포인트</p>
                         <div class="flex">
-                            <select class="able first" name="price">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+                            <select class="able first" id="valPoint" >
+                                <option th:selected="${userVO.getUserPrice()==1}">1</option>
+                                <option th:selected="${userVO.getUserPrice()==2}">2</option>
+                                <option th:selected="${userVO.getUserPrice()==3}">3</option>
+                                <option th:selected="${userVO.getUserPrice()==4}">4</option>
+                                <option th:selected="${userVO.getUserPrice()==5}">5</option>
                             </select>
                             <select class="able second hidden">
                                 <option></option>
@@ -168,30 +190,30 @@
                     <div id="location" class="marginBottom">
                         <p>지역 설정</p>
                         <div class="flex">
-                            <select class="able first" name="price" onchange="onOffChange(this)">
-                                <option value="a">온라인/오프라인 모두 가능</option>
-                                <option value="b">온라인만 가능</option>
-                                <option value="c">오프라인만 가능</option>
+                            <select class="able first" id="onOff" onchange="onOffChange(this)" th:value="${userVO.getUserOnOff()}">
+                                <option th:value="a">온라인/오프라인 모두 가능</option>
+                                <option th:value="b">온라인만 가능</option>
+                                <option th:value="c">오프라인만 가능</option>
                             </select>
-                            <select class="able second" name="price">
-                                <option value="z">상관없음</option>
-                                <option value="a">서울특별시</option>
-                                <option value="b">경기도</option>
-                                <option value="c">부산광역시</option>
-                                <option value="d">인천광역시</option>
-                                <option value="e">대구관역시</option>
-                                <option value="f">경상남도</option>
-                                <option value="g">경상북도</option>
-                                <option value="h">대전광역시</option>
-                                <option value="i">충청남도</option>
-                                <option value="j">충청북도</option>
-                                <option value="k">전라남도</option>
-                                <option value="l">전라북도</option>
-                                <option value="m">광주광역시</option>
-                                <option value="n">강원도</option>
-                                <option value="o">울산광역시</option>
-                                <option value="p">제주특별자치도</option>
-                                <option value="q">세종특별자치시</option>
+                            <select class="able second" id="sido">
+                                <option th:selected="${userVO.getUserLocation()=='상관없음'}">상관없음</option>
+                                <option th:selected="${userVO.getUserLocation()=='서울특별시'}">서울특별시</option>
+                                <option th:selected="${userVO.getUserLocation()=='경기도'}">경기도</option>
+                                <option th:selected="${userVO.getUserLocation()=='부산광역시'}">부산광역시</option>
+                                <option th:selected="${userVO.getUserLocation()=='인천광역시'}">인천광역시</option>
+                                <option th:selected="${userVO.getUserLocation()=='대구광역시'}">대구광역시</option>
+                                <option th:selected="${userVO.getUserLocation()=='경상남도'}">경상남도</option>
+                                <option th:selected="${userVO.getUserLocation()=='경상북도'}">경상북도</option>
+                                <option th:selected="${userVO.getUserLocation()=='대전광역시'}">대전광역시</option>
+                                <option th:selected="${userVO.getUserLocation()=='충청남도'}">충청남도</option>
+                                <option th:selected="${userVO.getUserLocation()=='충청북도'}">충청북도</option>
+                                <option th:selected="${userVO.getUserLocation()=='전라남도'}">전라남도</option>
+                                <option th:selected="${userVO.getUserLocation()=='전라북도'}">전라북도</option>
+                                <option th:selected="${userVO.getUserLocation()=='광주광역시'}">광주광역시</option>
+                                <option th:selected="${userVO.getUserLocation()=='강원도'}">강원도</option>
+                                <option th:selected="${userVO.getUserLocation()=='울산광역시'}">울산광역시</option>
+                                <option th:selected="${userVO.getUserLocation()=='제주특별자치도'}">제주특별자치도</option>
+                                <option th:selected="${userVO.getUserLocation()=='세종특별자치시'}">세종특별자치시</option>
                             </select>
                             <select class="able third hidden">
                                 <option></option>
@@ -202,17 +224,18 @@
                     <div id="time" class="marginBottom">
                         <p>시간 설정</p>
                         <div class="flex">
-                            <select class="able first" name="price">
-                                <option value="1">주중/주말 모두 가능</option>
-                                <option value="2">주중만 가능</option>
-                                <option value="3">주말만 가능</option>
+                            <select class="able first" id="week">
+                                <option th:selected="${userVO.getUserTime()=='평일오전'}">평일오전</option>
+                                <option th:selected="${userVO.getUserTime()=='평일오후'}">평일오후</option>
+                                <option th:selected="${userVO.getUserTime()=='주말오전'}">주말오전</option>
+                                <option th:selected="${userVO.getUserTime()=='주말오후'}">주말오후</option>
                             </select>
-                            <select class="able second" name="price">
-                                <option value="1">상관없음</option>
-                                <option value="2">오전 위주</option>
-                                <option value="3">오후 위주</option>
-                                <option value="4">저녁 위주</option>
-                            </select>
+<!--                            <select class="able second" name="times">-->
+<!--                                <option value="1">상관없음</option>-->
+<!--                                <option value="2">오전 위주</option>-->
+<!--                                <option value="3">오후 위주</option>-->
+<!--                                <option value="4">저녁 위주</option>-->
+<!--                            </select>-->
                             <select class="able third hidden">
                                 <option></option>
                             </select>
@@ -247,7 +270,10 @@
                             <input type="text" class="able" id="keyword" placeholder="태그는 최대 5개 가능합니다" minlength="3"
                                    maxlength="20" autocomplete="off">
                         </div>
-                        <div class="skillResult">
+                        <div class="skillResult" >
+                            <th:block th:each="tags:${userTagVO}">
+                            <a class='skillTag' th:text="${tags.tagName}"></a>
+                            </th:block>
 
                         </div>
                     </div>
@@ -255,20 +281,33 @@
 
                     <div id="content" class="marginBottom">
                         <p>자세한 소개</p>
-                        <textarea name="content" class="able" rows="5" maxlength="200" placeholder="최대 200자 까지 작성 가능합니다."></textarea>
+
+                        <textarea id="contents" name="content" th:text="${userVO.getUserContent()}" class="able" rows="5" maxlength="200"  placeholder="최대 200자 까지 작성 가능합니다."></textarea>
                     </div>
 
-
                     <div id="portfolio" class="marginBottom">
-                        <div id="url" class="flex a1">
-                            <input type="text" class="able" placeholder="URL을 입력해주세요">
+                        <div id="url" class="flex a1" th:each="portfolio, i: ${userPortfolioVO}">
+                            <input type="text" class="able" name="portUrl" th:value="${portfolio.portUrl}" placeholder="URL을 입력해주세요">
                             <input id="plusUrl" type="button" class="able" value="추가">
                         </div>
                     </div>
 
                 </div>
             </div>
-            <button class="submit">업데이트</button>
+            <button class="submit" id="sss" type="button">업데이트</button>
+            <input type="hidden" name="userMainSkill">
+            <input type="hidden" name="userLocation">
+            <input type="hidden" name="userMainDetail">
+            <input type="hidden" name="userMainLevel">
+            <input type="hidden" name="userSubSkill">
+            <input type="hidden" name="userSubDetail">
+            <input type="hidden" name="userSubLevel">
+            <input type="hidden" name="userOnOff">
+<!--            <input type="hidden" name="userPoint">-->
+            <input type="hidden" name="userPrice">
+            <input type="hidden" name="userTime">
+<!--            <input type="hidden" name="userInterest">-->
+            <input type="hidden" name="userContent">
         </form>
     </section>
 
@@ -279,87 +318,243 @@
                 <div>
                     <h3 class="titleMsg">지원 현황</h3>
                 </div>
-<!--                <div class="emptyBox">-->
-<!--                    <div>-->
-<!--                        <p>아직 완료된 프로젝트/스터디가 없습니다.</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-                <div class="projectGridWrap">
-                    <div class="projectTopInfo">
-                        <div class="topInfo">
-                            <div class="box-wrap">
-                                <div class="box green">
-                                    <span>NEW</span>
-                                </div>
-                                <div class="box black">
-                                    <span>사이드프로젝트</span>
-                                </div>
-                            </div>
-                            <div class="favorite"></div>
-                        </div>
-                        <div class="projectImg">
-                            <img src="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png">
-                        </div>
-                    </div>
-                    <div class="projectMiddleInfo">
-                        <p class="category">소셜네트워크</p>
-                        <p class="categoryText">[서울] 매칭앱 사이드 프로젝트</p>
-                    </div>
-                    <div class="projectBottomInfo">
-                        <div class="middleWrap">
-                            <div class="left">
-                                <div class="heart">
-                                    <img src="https://letspl.me/assets/images/ic-favorite-empty-white.svg">
-                                    <span class="heartCount">0</span>
-                                </div>
-                            </div>
-                            <div class="right">
-                                <div>
-                                    <span>89</span>
-                                    <span> (-)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bottomWrap">
-                            <div class="recruit">
-                                <div class="recruitStatus">
-                                    <span>모집완료</span>
-                                    <span>
-                                    0/1
-                                </span>
-                                    <div>
-                                        <img src="https://letspl.me/assets/images/ic-arrow-up.svg">
+                <!--                <div class="emptyBox">-->
+                <!--                    <div>-->
+                <!--                        <p>아직 완료된 프로젝트/스터디가 없습니다.</p>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+
+                <th:block th:each="project : ${projectList}">
+<!--                    <th:block th:if="${project.members.projectMemberStatus=='0'}">-->
+                    <th:block th:each="promembers : ${project.members}">
+                        <th:block th:if="${promembers.projectMemberStatus=='0'}">
+                    <div class="projectGridWrap">
+                        <div class="projectTopInfo">
+                            <div class="topInfo">
+                                <div class="box-wrap">
+                                    <div class="box green">
+                                        <span>NEW</span>
+                                    </div>
+                                    <div class="box black">
+                                        <span>사이드프로젝트</span>
                                     </div>
                                 </div>
-                                <div class="recruitModel">
-                                    <ul>
-                                        <li>
-                                            <span>UI/UX기획</span>
-                                            <span>1명</span>
-                                        </li>
-                                        <li>
-                                            <span>웹 프론트엔드</span>
-                                            <span>2명</span>
-                                        </li>
-                                    </ul>
+                                <div class="favorite"></div>
+                            </div>
+                            <div class="projectImg">
+                                <img th:if="${project.projectImgPath == null}"
+                                     th:src="'/images/'+${project.projectImg}">
+                                <img th:unless="${project.projectImgPath == null}"
+                                     th:src="'/project/display?fileName='+ ${project.projectImgPath} + '/' + ${project.projectImgUuid} + '_' + ${project.projectImg}">
+                            </div>
+                        </div>
+                        <div class="projectMiddleInfo">
+                            <p class="category" th:text="${project.projectPart}"></p>
+                            <p class="categoryText" th:text="'['+${project.projectLocation}+']'+${project.projectName}"></p>
+                        </div>
+                        </a>
+                        <div class="projectBottomInfo">
+                            <div class="middleWrap">
+                                <div class="left">
+                                    <div class="heart">
+                                        <img src="https://letspl.me/assets/images/ic-favorite-empty-white.svg">
+                                        <span class="heartCount">0</span>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <div>
+                                        <span th:text="${project.projectReadCount}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bottomWrap">
+                                <div class="recruit">
+                                    <div class="recruitStatus">
+                                        <span th:if="${project.projectStatus=='1'}">[모집중]</span>
+                                        <span th:if="${project.projectStatus=='2'}">[모집완료]</span>
+                                        <span>
+                                    0/1
+                                </span>
+                                        <div>
+                                            <img src="https://letspl.me/assets/images/ic-arrow-up.svg">
+                                        </div>
+                                    </div>
+                                    <div class="recruitModel">
+                                        <ul>
+                                            <th:block th:each="person : ${project.persons}">
+                                                <li>
+                                                    <span th:text="${person.projectSubSkill}"></span>
+                                                    <span th:text="${person.projectCount}"></span>
+                                                </li>
+                                            </th:block>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                        </th:block>
+                    </th:block>
+                </th:block>
+
+        <!--    진행현황            -->
                 <div>
                     <div>
                         <h3 class="titleMsg">진행 현황</h3>
                     </div>
-                    <div class="emptyBox">
-                        <div>
-                            <p>아직 진행중인 프로젝트/스터디가 없습니다.</p>
-                        </div>
-                    </div>
+                        <th:block th:each="project : ${projectList}">
+                            <th:block th:each="promembers : ${project.members}">
+                                <th:block th:if="${promembers.projectMemberStatus=='1'}">
+                            <div class="projectGridWrap">
+                                <div class="projectTopInfo">
+                                    <div class="topInfo">
+                                        <div class="box-wrap">
+                                            <div class="box green">
+                                                <span>NEW</span>
+                                            </div>
+                                            <div class="box black">
+                                                <span>사이드프로젝트</span>
+                                            </div>
+                                        </div>
+                                        <div class="favorite"></div>
+                                    </div>
+                                    <div class="projectImg">
+                                        <img th:if="${project.projectImgPath == null}"
+                                             th:src="'/images/'+${project.projectImg}">
+                                        <img th:unless="${project.projectImgPath == null}"
+                                             th:src="'/project/display?fileName='+ ${project.projectImgPath} + '/' + ${project.projectImgUuid} + '_' + ${project.projectImg}">
+                                    </div>
+                                </div>
+                                <div class="projectMiddleInfo">
+                                    <p class="category" th:text="${project.projectPart}"></p>
+                                    <p class="categoryText" th:text="'['+${project.projectLocation}+']'+${project.projectName}"></p>
+                                </div>
+                                </a>
+                                <div class="projectBottomInfo">
+                                    <div class="middleWrap">
+                                        <div class="left">
+                                            <div class="heart">
+                                                <img src="https://letspl.me/assets/images/ic-favorite-empty-white.svg">
+                                                <span class="heartCount">0</span>
+                                            </div>
+                                        </div>
+                                        <div class="right">
+                                            <div>
+                                                <span th:text="${project.projectReadCount}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bottomWrap">
+                                        <div class="recruit">
+                                            <div class="recruitStatus">
+                                                <span th:if="${project.projectStatus=='1'}">[모집중]</span>
+                                                <span th:if="${project.projectStatus=='2'}">[모집완료]</span>
+                                                <span>
+                                    0/1
+                                </span>
+                                                <div>
+                                                    <img src="https://letspl.me/assets/images/ic-arrow-up.svg">
+                                                </div>
+                                            </div>
+                                            <div class="recruitModel">
+                                                <ul>
+                                                    <th:block th:each="person : ${project.persons}">
+                                                        <li>
+                                                            <span th:text="${person.projectSubSkill}"></span>
+                                                            <span th:text="${person.projectCount}"></span>
+                                                        </li>
+                                                    </th:block>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </th:block>
+                            </th:block>
+                        </th:block>
+
+<!--                    <div class="emptyBox">-->
+<!--                        <div>-->
+<!--                            <p>아직 진행중인 프로젝트/스터디가 없습니다.</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <div>
                         <div>
                             <h3 class="titleMsg">완료 현황</h3>
                         </div>
+                            <th:block th:each="project : ${projectList}">
+                                <th:block th:each="promembers : ${project.members}">
+                                    <th:block th:if="${promembers.projectMemberStatus=='2'}">
+                                    <div class="projectGridWrap">
+                                        <div class="projectTopInfo">
+                                            <div class="topInfo">
+                                                <div class="box-wrap">
+                                                    <div class="box green">
+                                                        <span>NEW</span>
+                                                    </div>
+                                                    <div class="box black">
+                                                        <span>사이드프로젝트</span>
+                                                    </div>
+                                                </div>
+                                                <div class="favorite"></div>
+                                            </div>
+                                            <div class="projectImg">
+                                                <img th:if="${project.projectImgPath == null}"
+                                                     th:src="'/images/'+${project.projectImg}">
+                                                <img th:unless="${project.projectImgPath == null}"
+                                                     th:src="'/project/display?fileName='+ ${project.projectImgPath} + '/' + ${project.projectImgUuid} + '_' + ${project.projectImg}">
+                                            </div>
+                                        </div>
+                                        <div class="projectMiddleInfo">
+                                            <p class="category" th:text="${project.projectPart}"></p>
+                                            <p class="categoryText" th:text="'['+${project.projectLocation}+']'+${project.projectName}"></p>
+                                        </div>
+                                        </a>
+                                        <div class="projectBottomInfo">
+                                            <div class="middleWrap">
+                                                <div class="left">
+                                                    <div class="heart">
+                                                        <img src="https://letspl.me/assets/images/ic-favorite-empty-white.svg">
+                                                        <span class="heartCount">0</span>
+                                                    </div>
+                                                </div>
+                                                <div class="right">
+                                                    <div>
+                                                        <span th:text="${project.projectReadCount}"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="bottomWrap">
+                                                <div class="recruit">
+                                                    <div class="recruitStatus">
+                                                        <span th:if="${project.projectStatus=='1'}">[모집중]</span>
+                                                        <span th:if="${project.projectStatus=='2'}">[모집완료]</span>
+                                                        <span>
+                                    0/1
+                                </span>
+                                                        <div>
+                                                            <img src="https://letspl.me/assets/images/ic-arrow-up.svg">
+                                                        </div>
+                                                    </div>
+                                                    <div class="recruitModel">
+                                                        <ul>
+                                                            <th:block th:each="person : ${project.persons}">
+                                                                <li>
+                                                                    <span th:text="${person.projectSubSkill}"></span>
+                                                                    <span th:text="${person.projectCount}"></span>
+                                                                </li>
+                                                            </th:block>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th:block>
+                                </th:block>
+
+                            </th:block>
                         <div class="emptyBox">
                             <div>
                                 <p>아직 완료된 프로젝트/스터디가 없습니다.</p>
@@ -378,80 +573,76 @@
                 <div>
                     <h3 class="titleMsg">내 게시글</h3>
                 </div>
-                <div class="emptyBox">
-                    <div>
-                        <p>아직 작성하신 게시글 없습니다.</p>
-                    </div>
-                    <div>
-                        <button class="submit"><span>게시글 작성하러 가기</span></button>
-                    </div>
-                </div>
+<!--                <div class="emptyBox"> 게시글이 없을때 보여줘야함-->
+<!--                    <div>-->
+<!--                        <p>아직 작성하신 게시글 없습니다.</p>-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <button class="submit"><span>게시글 작성하러 가기</span></button>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <!-- 본인스토리작성한부분 -->
                 <div class="myStoryWrap">
                     <div class="myStory">
                         <ul class="storyTimeUl">
-                        <li class="storyTimeLi">
+                            <li class="storyTimeLi" th:each="allStory:${allStoryList}">
                             <div class="storyTimeLineLeft">
-                                <div class="storyTimeLineImg">
-                                    <img src="/images/썸네일6.png">
-                                </div>
-                                <div class="storyTimeLineContents">
-                                    <div class="timeLineTitWrap">
-                                        <span class="timeLintCategory">workspace-공식채널</span>
-                                        <p class="timeLineTit">[출시/업데이트] 워크스페이스 업데이트 완료</p>
+                                <a th:href="@{/story/storyDetail(storyNum=${allStory.getStoryNum()})}">
+                                    <div class="storyTimeLineImg">
+                                        <img th:src="@{/story/displayTh(storyImgPath=${allStory.getStoryImgPath()}, storyImgUuid=${allStory.getStoryImgUuid()}, storyImgName=${allStory.getStoryImgName()})}">
                                     </div>
-                                    <div class="timeLineTxt">안녕하세요 워크스페이스입니다. 오늘은 2022년 5월 3일 입니다.
-                                        여러분 가입해주셔서 너무 감사하고 반가워요 :) Throws3팀 화이팅입니다 Throws3팀의 멤버로는
-                                        팀장 배상혁 부팀장 한서현 팀원 박상아 홍승근 송준형으로 구성되어있는 팀 입니다.
-                                        각자 맡은 파트 열심히해서 좋은 프로젝트 완성해봅시다 :D
+                                </a>
+                                <a th:href="@{/story/storyDetail(storyNum=${allStory.getStoryNum()})}">
+                                    <div class="storyTimeLineContents">
+                                        <div class="timeLineTitWrap">
+                                            <span class="timeLintCategory" th:text="${allStory.getUserVO().getUserNickName()}"></span>
+                                            <p class="timeLineTit" th:text="|[${allStory.getStoryPart}] ${allStory.getStoryTitle()}"|>[출시/업데이트] 워크스페이스 업데이트 완료</p>
+                                        </div>
+                                        <div class="timeLineTxt" th:text="${allStory.getStoryContent()}">
+                                        </div>
+                                        <div class="timeLineTagWrap">
+                                            <th:block th:each="tag:${allStory.getTags()}">
+                                                <span th:text="|#${tag.getTagName()}|"></span>
+                                            </th:block>
+                                        </div>
                                     </div>
-                                    <div class="timeLineTagWrap">
-                                        <span>#상아에요</span>
-                                        <span># 상아태그</span>
-                                <span>#상혁준형</span>
-                                <span>#서현승근</span>
-                                <span>#화이팅</span>
+                                </a>
                             </div>
-                        </div>
-                    </div>
-                    <div class="storyTimeLineRight">
-                        <!-- <div class="heartWrap">
-                            <div class="favorite"></div>
-                        </div> -->
-                        <div class="TimeLineStatusWrap">
-                            <p class="storyTimeLineStatusDiv" style="margin-right: 16px !important;">
-                                <img class="storyTimeLineDivImg" src="/images/eye.png">
-                                <span class="divFooterTxt">122</span>
-                            </p>
-                             <p class="storyTimeLineStatusDiv" style="margin-right: 16px !important;">
-                                <img class="storyTimeLineDivImg" src="/images/msg.png">
-                                <span class="divFooterTxt">0</span>
-                            </p>
-                            <p class="storyTimeLineStatusDiv" style="margin-right: 16px !important;">
-                                <img class="storyTimeLineDivImg" src="/images/likeup.png">
-                                <span class="divFooterTxt">4</span>
-                            </p>
-                        </div>
-                    </div>
-                    </li>
+                            <div class="storyTimeLineRight">
+                                <div class="TimeLineStatusWrap">
+                                    <p class="storyTimeLineStatusDiv" style="margin-right: 16px !important;">
+                                        <img class="storyTimeLineDivImg" src="/images/eye.png">
+                                        <span class="divFooterTxt" th:text="${allStory.getStoryReadCount()}"></span>
+                                    </p>
+                                    <p class="storyTimeLineStatusDiv" style="margin-right: 16px !important;">
+                                        <img class="storyTimeLineDivImg" src="/images/msg.png">
+                                        <span class="divFooterTxt" th:text="${allStory.getReplies().size()}"></span>
+                                    </p>
+                                    <p class="storyTimeLineStatusDiv" style="margin-right: 16px !important;">
+                                        <img class="storyTimeLineDivImg" src="/images/likeup.png">
+                                        <span class="divFooterTxt" th:text="${allStory.getLikes().size()}"></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
                         </ul>
                     </div>
                 </div>
             </div>
             <!-- 본인스토리여기까지 -->
-            <div>
-                <div>
-                    <h3 class="titleMsg">내 시리즈</h3>
-                </div>
-                <div class="emptyBox">
-                    <div>
-                        <p>아직 추가한 시리즈가 없습니다.</p>
-                    </div>
-                    <div>
-                        <button class="submit">시리즈 추가하기</button>
-                    </div>
-                </div>
-            </div>
+<!--            <div>-->
+<!--                <div>-->
+<!--                    <h3 class="titleMsg">내 시리즈</h3>-->
+<!--                </div>-->
+<!--                <div class="emptyBox">-->
+<!--                    <div>-->
+<!--                        <p>아직 추가한 시리즈가 없습니다.</p>-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <button class="submit">시리즈 추가하기</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
         </div>
     </section>
@@ -462,76 +653,79 @@
                 <div>
                     <h3 class="titleMsg">찜한 프로젝트/스터디</h3>
                 </div>
-                <div class="emptyBox">
-                    <div>
-                        <p>아직 찜한 프로젝트/스터디가 없습니다.</p>
-                    </div>
-                </div>
+<!--                <div class="emptyBox">-->
+<!--                    <div>-->
+<!--                        <p>아직 찜한 프로젝트/스터디가 없습니다.</p>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <!-- 프로젝트/스터디찜했을경우 -->
-                <div class="projectGridWrap">
-                    <div class="projectTopInfo">
-                        <div class="topInfo">
-                            <div class="box-wrap">
-                                <div class="box green">
-                                    <span>NEW</span>
-                                </div>
-                                <div class="box black">
-                                    <span>사이드프로젝트</span>
-                                </div>
-                            </div>
-                            <div class="favorite"></div>
-                        </div>
-                        <div class="projectImg">
-                            <img src="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png">
-                        </div>
-                    </div>
-                    <div class="projectMiddleInfo">
-                        <p class="category">소셜네트워크</p>
-                        <p class="categoryText">[서울] 매칭앱 사이드 프로젝트</p>
-                    </div>
-                    <div class="projectBottomInfo">
-                        <div class="middleWrap">
-                            <div class="left">
-                                <div class="heart">
-                                    <img src="https://letspl.me/assets/images/ic-favorite-empty-white.svg">
-                                    <span class="heartCount">0</span>
-                                </div>
-                            </div>
-                            <div class="right">
-                                <div>
-                                    <span>89</span>
-                                    <span> (-)</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bottomWrap">
-                            <div class="recruit">
-                                <div class="recruitStatus">
-                                    <span>모집완료</span>
-                                    <span>
-                                    0/1
-                                </span>
-                                    <div>
-                                        <img src="https://letspl.me/assets/images/ic-arrow-up.svg">
+                <th:block th:each="projects : ${projectLikeList}">
+                    <div class="projectGridWrap">
+                        <div class="projectTopInfo">
+                            <div class="topInfo">
+                                <div class="box-wrap">
+                                    <div class="box green">
+                                        <span>NEW</span>
+                                    </div>
+                                    <div class="box black">
+                                        <span>사이드프로젝트</span>
                                     </div>
                                 </div>
-                                <div class="recruitModel">
-                                    <ul>
-                                        <li>
-                                            <span>UI/UX기획</span>
-                                            <span>1명</span>
-                                        </li>
-                                        <li>
-                                            <span>웹 프론트엔드</span>
-                                            <span>2명</span>
-                                        </li>
-                                    </ul>
+                                <div class="favorite"></div>
+                            </div>
+                            <div class="projectImg">
+                                <img th:if="${projects.projectVO.projectImgPath == null}"
+                                     th:src="'/images/'+${projects.projectVO.projectImg}">
+                                <img th:unless="${projects.projectVO.projectImgPath == null}"
+                                     th:src="'/project/display?fileName='+ ${projects.projectVO.projectImgPath} + '/' + ${projects.projectVO.projectImgUuid} + '_' + ${projects.projectVO.projectImg}">
+                            </div>
+                        </div>
+                        <div class="projectMiddleInfo">
+                            <p class="category" th:text="${projects.projectVO.projectPart}"></p>
+                            <p class="categoryText" th:text="'['+${projects.projectVO.projectLocation}+']'+${projects.projectVO.projectName}"></p>
+                        </div>
+                        </a>
+                        <div class="projectBottomInfo">
+                            <div class="middleWrap">
+                                <div class="left">
+                                    <div class="heart">
+                                        <img src="https://letspl.me/assets/images/ic-favorite-empty-white.svg">
+                                        <span class="heartCount">0</span>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <div>
+                                        <span th:text="${projects.projectVO.projectReadCount}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bottomWrap">
+                                <div class="recruit">
+                                    <div class="recruitStatus">
+                                        <span th:if="${projects.projectVO.projectStatus=='1'}">[모집중]</span>
+                                        <span th:if="${projects.projectVO.projectStatus=='2'}">[모집완료]</span>
+                                        <span>
+                                    0/1
+                                </span>
+                                        <div>
+                                            <img src="https://letspl.me/assets/images/ic-arrow-up.svg">
+                                        </div>
+                                    </div>
+                                    <div class="recruitModel">
+                                        <ul>
+                                            <th:block th:each="persons : ${projects.projectVO.persons}">
+                                                <li>
+                                                    <span th:text="${persons.projectSubSkill}"></span>
+                                                    <span th:text="${persons.projectCount}"></span>
+                                                </li>
+                                            </th:block>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </th:block>
             <!-- 찜한 프로젝트/스터디 여기까지 -->
 
             <div>
@@ -555,7 +749,7 @@
                                     </div>
                                     <a class="like"></a>
                                 </div>
-        
+
                                 <div class="usertool">
                                     <div class="user1">
                                         <div class="userLvIcon">
@@ -589,15 +783,15 @@
                                         </div>
                                     </div>
                                 </div>
-        
+
                             </div>
-        
+
                             <div class="userinfo">
                                 <div class="bon"><span class="info">[본캐]UI/UX기획</span><span class="num">중수</span></div>
                                 <div class="boo"><span class="info">[부캐]게임기획</span><span
                                         class="num">초보</span></div>
                             </div>
-        
+
                             <div class="usertag">
                                 <ul class="ulusertag">
                                     <li class="liusertag">#IT</li>
@@ -612,7 +806,7 @@
                                 <img class="btimg" src="/images/BBBB.png">
                                 <p class="btchat">BIt Chat</p>
                             </div>
-        
+
                         </li>
                         <!-- 여기까지 1번 -->
                         <li class="userGrid">
@@ -623,7 +817,7 @@
                                     </div>
                                     <a class="like"></a>
                                 </div>
-        
+
                                 <div class="usertool">
                                     <div class="user1">
                                         <div class="userLvIcon">
@@ -657,15 +851,15 @@
                                         </div>
                                     </div>
                                 </div>
-        
+
                             </div>
-        
+
                             <div class="userinfo">
                                 <div class="bon"><span class="info">[본캐]UI/UX기획</span><span class="num">중수</span></div>
                                 <div class="boo"><span class="info">[부캐]게임기획</span><span
                                         class="num">초보</span></div>
                             </div>
-        
+
                             <div class="usertag">
                                 <ul class="ulusertag">
                                     <li class="liusertag">#IT</li>
@@ -680,7 +874,7 @@
                                 <img class="btimg" src="/images/BBBB.png">
                                 <p class="btchat">BIt Chat</p>
                             </div>
-        
+
                         </li>
                         <!-- 2번 -->
                         <li class="userGrid">
@@ -691,75 +885,7 @@
                                     </div>
                                     <a class="like"></a>
                                 </div>
-        
-                                <div class="usertool">
-                                    <div class="user1">
-                                        <div class="userLvIcon">
-                                            <img  class="lvIcon" src="c/images/level_6.png">
-                                        </div>
-                                        <div class="userGridName">
-                                            <p class="ugname">박상아</p>
-                                        </div>
-                                        <div class="usercheckIcon">
-                                            <img class="checkIcon" src="/images/ic-certi-red.png">
-                                        </div>
-                                    </div>
-                                    <div class="userInn">
-                                        <div class="bitandheart">
-                                            <div class="bitdiv">
-                                                <div class="bitimg">
-                                                    <img src="/images/BBBB.png" class="bitIcon">
-                                                </div>
-                                                <div class="bittag">
-                                                    <p class="bitptag">3</p>
-                                                </div>
-                                            </div>
-                                            <div class="heartdiv">
-                                                <div class="heartimg">
-                                                    <img src="/images/ico_like.png"
-                                                         class="heartIcon"></div>
-                                                <div class="hearttag">
-                                                    <p class="heartptag">1</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-        
-                            </div>
-        
-                            <div class="userinfo">
-                                <div class="bon"><span class="info">[본캐]UI/UX기획</span><span class="num">중수</span></div>
-                                <div class="boo"><span class="info">[부캐]게임기획</span><span
-                                        class="num">초보</span></div>
-                            </div>
-        
-                            <div class="usertag">
-                                <ul class="ulusertag">
-                                    <li class="liusertag">#IT</li>
-                                    <li class="liusertag">#UIUX</li>
-                                    <li class="liusertag">#프론트</li>
-                                    <li class="liusertag">#디자인</li>
-                                    <li class="liusertag">#기획</li>
-                                </ul>
-                                <p class="join">진행중인 모임이 없습니다.</p>
-                            </div>
-                            <div class="userGridbottom">
-                                <img class="btimg" src="/images/BBBB.png">
-                                <p class="btchat">BIt Chat</p>
-                            </div>
-        
-                        </li>
-                        <!-- 3번 -->
-                        <li class="userGrid">
-                            <div class="userGridtop">
-                                <div class="userIn" style="display: flex;">
-                                    <div class="userGridimg">
-                                        <img src="/images/여.png" style="width: 50px; object-fit: cover;">
-                                    </div>
-                                    <a class="like"></a>
-                                </div>
-        
+
                                 <div class="usertool">
                                     <div class="user1">
                                         <div class="userLvIcon">
@@ -793,15 +919,15 @@
                                         </div>
                                     </div>
                                 </div>
-        
+
                             </div>
-        
+
                             <div class="userinfo">
                                 <div class="bon"><span class="info">[본캐]UI/UX기획</span><span class="num">중수</span></div>
                                 <div class="boo"><span class="info">[부캐]게임기획</span><span
                                         class="num">초보</span></div>
                             </div>
-        
+
                             <div class="usertag">
                                 <ul class="ulusertag">
                                     <li class="liusertag">#IT</li>
@@ -816,35 +942,112 @@
                                 <img class="btimg" src="/images/BBBB.png">
                                 <p class="btchat">BIt Chat</p>
                             </div>
-        
+
+                        </li>
+                        <!-- 3번 -->
+                        <li class="userGrid">
+                            <div class="userGridtop">
+                                <div class="userIn" style="display: flex;">
+                                    <div class="userGridimg">
+                                        <img src="/images/여.png" style="width: 50px; object-fit: cover;">
+                                    </div>
+                                    <a class="like"></a>
+                                </div>
+
+                                <div class="usertool">
+                                    <div class="user1">
+                                        <div class="userLvIcon">
+                                            <img  class="lvIcon" src="/images/level_6.png">
+                                        </div>
+                                        <div class="userGridName">
+                                            <p class="ugname">박상아</p>
+                                        </div>
+                                        <div class="usercheckIcon">
+                                            <img class="checkIcon" src="/images/ic-certi-red.png">
+                                        </div>
+                                    </div>
+                                    <div class="userInn">
+                                        <div class="bitandheart">
+                                            <div class="bitdiv">
+                                                <div class="bitimg">
+                                                    <img src="/images/BBBB.png" class="bitIcon">
+                                                </div>
+                                                <div class="bittag">
+                                                    <p class="bitptag">3</p>
+                                                </div>
+                                            </div>
+                                            <div class="heartdiv">
+                                                <div class="heartimg">
+                                                    <img src="/images/ico_like.png"
+                                                         class="heartIcon"></div>
+                                                <div class="hearttag">
+                                                    <p class="heartptag">1</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="userinfo">
+                                <div class="bon"><span class="info">[본캐]UI/UX기획</span><span class="num">중수</span></div>
+                                <div class="boo"><span class="info">[부캐]게임기획</span><span
+                                        class="num">초보</span></div>
+                            </div>
+
+                            <div class="usertag">
+                                <ul class="ulusertag">
+                                    <li class="liusertag">#IT</li>
+                                    <li class="liusertag">#UIUX</li>
+                                    <li class="liusertag">#프론트</li>
+                                    <li class="liusertag">#디자인</li>
+                                    <li class="liusertag">#기획</li>
+                                </ul>
+                                <p class="join">진행중인 모임이 없습니다.</p>
+                            </div>
+                            <div class="userGridbottom">
+                                <img class="btimg" src="/images/BBBB.png">
+                                <p class="btchat">BIt Chat</p>
+                            </div>
+
                         </li>
                         <!-- 4번 -->
-        </ul>
+                    </ul>
                 </div>
-        
+
             </div>
         </div>
     </section>
     <!-----------------------------------------------------------------------알림 !!--------------------------------------------------------------------->
+
+<!--    <th:block th:each="exps, i:${userExpVO}">-->
+<!--        <tr>-->
+<!--            <td  th:text="${exps.expDate}">22.05.01 13:27</td>-->
+<!--            <td  th:text="${exps.expValue}">-100</td>-->
+<!--            <td class="lastCell" th:text="${exps.expHistory}">스토리 삭제</td>-->
+<!--        </tr>-->
+<!--    </th:block>-->
     <section id="alert" class="pageNav">
         <div>
             <div>
                 <h3 class="titleMsg">알림 내역</h3>
             </div>
+         <th:block th:each="alert, i:${userAlertVO}">
             <div class="alertWrap">
                 <div class="alertList">
                     <div class="alertDay">
-                        <p>22.05.02</p>
+                        <p th:text="${alert.alertDate}"></p>
                     </div>
                     <div class="alertSide">
                         <div class="alertBox flex flexs">
                             <div>
                                 <div>
-                                    <span class="alertTitle">[프로젝트/스터디]</span>
-                                    <span class="alertDate">22.05.01</span>
+                                    <span class="alertTitle" th:text="${alert.alertPart}"></span>
+                                    <span class="alertDate" th:text="${alert.alertDate}"></span>
                                 </div>
                                 <div>
-                                    <span class="alertContent">프로젝트 ddddd가 [안녕하세요 렛플입니다. 테스트용으로 작성된것으로 보입니다. 임시저장상태로 다시 변경했습니다.] 사유로 반려되었습니다</span>
+                                    <span class="alertContent" th:text="${alert.alertContent}"></span>
                                 </div>
                             </div>
                             <div>
@@ -852,24 +1055,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="alertSide">
-                        <div class="alertBox flex flexs">
-                            <div>
-                                <div>
-                                    <span class="alertTitle">[프로젝트/스터디]</span>
-                                    <span class="alertDate">22.05.01</span>
-                                </div>
-                                <div>
-                                    <span class="alertContent">프로젝트 ddddd가 [안녕하세요 렛플입니다. 테스트용으로 작성된것으로 보입니다. 임시저장상태로 다시 변경했습니다.] 사유로 반려되었습니다</span>
-                                </div>
-                            </div>
-                            <div>
-                                <a href="#">프로젝트 보기</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--                    <div class="alertSide">-->
+<!--                        <div class="alertBox flex flexs">-->
+<!--                            <div>-->
+<!--                                <div>-->
+<!--                                    <span class="alertTitle">[프로젝트/스터디]</span>-->
+<!--                                    <span class="alertDate">22.05.01</span>-->
+<!--                                </div>-->
+<!--                                <div>-->
+<!--                                    <span class="alertContent">프로젝트 ddddd가 [안녕하세요 렛플입니다. 테스트용으로 작성된것으로 보입니다. 임시저장상태로 다시 변경했습니다.] 사유로 반려되었습니다</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <a href="#">프로젝트 보기</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+         </th:block>
+
             <div class="alertWrap">
                 <div>
                     <div class="alertDay">
@@ -896,6 +1101,10 @@
         </div>
     </section>
     <!-----------------------------------------------------------------------포인트 !!-------------------------------------------------------------------->
+<!--    <th:block th:each="tag, i:${userTagVO}">-->
+<!--        <a class='skillTag' th:text="${tag.tagName}"></a>
+th:value="${userVO.getUserSubLevel()}"-->
+<!--    </th:block>-->
     <section id="point" class="pageNav">
         <div>
             <div>
@@ -911,30 +1120,23 @@
                 <table id="pointTable" class="pointTable">
                     <thead>
                     <tr>
+
                         <th class="firstCell">날짜</th>
                         <th class="secondCell">포인트</th>
                         <th>상세</th>
                         <th class="lastCell">비고</th>
+
                     </tr>
                     </thead>
-                    <tr>
-                        <td>22.04.18</td>
-                        <td>10</td>
-                        <td>[이벤트] 본인인증 완료</td>
-                        <td class="lastCell">비고</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.18</td>
-                        <td>10</td>
-                        <td>[이벤트] 본인인증 완료</td>
-                        <td class="lastCell">비고</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.18</td>
-                        <td>10</td>
-                        <td>[이벤트] 본인인증 완료</td>
-                        <td class="lastCell">비고</td>
-                    </tr>
+
+                    <th:block th:each="points, i:${userPointVO}">
+                        <tr th:if="${points.pointStatus}=='1'">
+                        <td th:text="${points.pointDate}"></td>
+                        <td th:text="${points.pointValue}"></td>
+                        <td th:text="${points.getPointHistory()}"></td>
+                        <td class="lastCell">충전</td>
+                        </tr>
+                    </th:block>
                 </table>
             </div>
             <div>
@@ -947,36 +1149,15 @@
                         <th class="lastCell">비고</th>
                     </tr>
                     </thead>
-                    <tr>
-                        <td>22.04.18</td>
-                        <td>10</td>
-                        <td>[이벤트] 본인인증 완료</td>
-                        <td class="lastCell">사용</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.18</td>
-                        <td>10</td>
-                        <td>[이벤트] 본인인증 완료</td>
-                        <td class="lastCell">사용</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.18</td>
-                        <td>10</td>
-                        <td>[이벤트] 본인인증 완료</td>
-                        <td class="lastCell">사용</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.18</td>
-                        <td>10</td>
-                        <td>[이벤트] 본인인증 완료</td>
-                        <td class="lastCell">사용</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.18</td>
-                        <td>10</td>
-                        <td>[이벤트] 본인인증 완료</td>
-                        <td class="lastCell">사용</td>
-                    </tr>
+                    <th:block th:each="points, i:${userPointVO}">
+                        <tr th:if="${points.pointStatus}=='2'">
+                            <td th:text="${points.pointDate}"></td>
+                            <td th:text="${points.pointValue}"></td>
+                            <td th:text="${points.getPointHistory()}"></td>
+                            <td class="lastCell">사용</td>
+                        </tr>
+                    </th:block>
+
                 </table>
             </div>
 
@@ -987,7 +1168,9 @@
     <section id="score" class="pageNav">
         <div>
             <div>
-                <h3 class="titleMsg">워크스코어 L6 (510) - 다음까지 291</h3>
+    <!-- 레벨은 출력되는데 경험치는 연산해야하나?
+        -->
+                <h3 class="titleMsg" >워크스코어 Lv<span style="color: green; font-weight: 600;" th:text="${userVO.getUserLevel()}"></span></h3>
             </div>
             <div>
                 <table id="scoreTable">
@@ -998,156 +1181,158 @@
                         <th class="lastCell">상세</th>
                     </tr>
                     </thead>
+                    <th:block th:each="exps, i:${userExpVO}">
                     <tr>
-                        <td>22.05.01 13:27</td>
-                        <td>-100</td>
-                        <td class="lastCell">스토리 삭제</td>
+                        <td  th:text="${exps.expDate}">22.05.01 13:27</td>
+                        <td  th:text="${exps.expValue}">-100</td>
+                        <td class="lastCell" th:text="${exps.expHistory}">스토리 삭제</td>
                     </tr>
-                    <tr>
-                        <td>22.05.01 13:26</td>
-                        <td>100</td>
-                        <td class="lastCell">스토리 작성</td>
-                    </tr>
-                    <tr>
-                        <td>22.05.01 13:26</td>
-                        <td>10</td>
-                        <td class="lastCell">일일 로그인 완료</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.30 15:50</td>
-                        <td>-50</td>
-                        <td class="lastCell">프로젝트/스터디 참여 철회</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.30 15:49</td>
-                        <td>50</td>
-                        <td class="lastCell">프로젝트/스터디 참여 신청</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.30 15:48</td>
-                        <td>10</td>
-                        <td class="lastCell">일일 로그인 완료</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.29 10:11</td>
-                        <td>10</td>
-                        <td class="lastCell">일일 로그인 완료</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.28 09:38</td>
-                        <td>10</td>
-                        <td class="lastCell">일일 로그인 완료</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.27 15:21</td>
-                        <td>10</td>
-                        <td class="lastCell">일일 로그인 완료</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.26 14:06</td>
-                        <td>10</td>
-                        <td class="lastCell">일일 로그인 완료</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.22 15:03</td>
-                        <td>-50</td>
-                        <td class="lastCell">프로젝트/스터디 좋아요 취소</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.22 15:03</td>
-                        <td>30</td>
-                        <td class="lastCell">워크인 좋아요</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.22 15:03</td>
-                        <td>-50</td>
-                        <td class="lastCell">프로젝트/스터디 좋아요 취소</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.22 15:03</td>
-                        <td>30</td>
-                        <td class="lastCell">워크인 좋아요</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.22 15:03</td>
-                        <td>-50</td>
-                        <td class="lastCell">프로젝트/스터디 좋아요 취소</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.22 15:03</td>
-                        <td>30</td>
-                        <td class="lastCell">워크인 좋아요</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.22 13:19</td>
-                        <td>-50</td>
-                        <td class="lastCell">글 삭제</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.22 13:19</td>
-                        <td>50</td>
-                        <td class="lastCell">글 등록</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.22 13:12</td>
-                        <td>-100</td>
-                        <td class="lastCell">스토리 삭제</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.22 13:12</td>
-                        <td>100</td>
-                        <td class="lastCell">스토리 작성</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.22 11:26</td>
-                        <td>10</td>
-                        <td class="lastCell">일일 로그인 완료</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.21 15:50</td>
-                        <td>30</td>
-                        <td class="lastCell">워크인 좋아요</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.21 14:33</td>
-                        <td>10</td>
-                        <td class="lastCell">일일 로그인 완료</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.20 15:14</td>
-                        <td>10</td>
-                        <td class="lastCell">일일 로그인 완료</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.18 11:01</td>
-                        <td>100</td>
-                        <td class="lastCell">상대방의 리뷰완료</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.18 11:00</td>
-                        <td>30</td>
-                        <td class="lastCell">워크인 좋아요</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.18 10:12</td>
-                        <td>10</td>
-                        <td class="lastCell">일일 로그인 완료</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.17 12:17</td>
-                        <td>200</td>
-                        <td class="lastCell">본 캐릭터 생성완료</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.17 12:17</td>
-                        <td>100</td>
-                        <td class="lastCell">회원가입 완료</td>
-                    </tr>
-                    <tr>
-                        <td>22.04.17 12:17</td>
-                        <td>10</td>
-                        <td class="lastCell">일일 로그인 완료</td>
-                    </tr>
+                    </th:block>
+<!--                    <tr>-->
+<!--                        <td>22.05.01 13:26</td>-->
+<!--                        <td>100</td>-->
+<!--                        <td class="lastCell">스토리 작성</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.05.01 13:26</td>-->
+<!--                        <td>10</td>-->
+<!--                        <td class="lastCell">일일 로그인 완료</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.30 15:50</td>-->
+<!--                        <td>-50</td>-->
+<!--                        <td class="lastCell">프로젝트/스터디 참여 철회</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.30 15:49</td>-->
+<!--                        <td>50</td>-->
+<!--                        <td class="lastCell">프로젝트/스터디 참여 신청</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.30 15:48</td>-->
+<!--                        <td>10</td>-->
+<!--                        <td class="lastCell">일일 로그인 완료</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.29 10:11</td>-->
+<!--                        <td>10</td>-->
+<!--                        <td class="lastCell">일일 로그인 완료</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.28 09:38</td>-->
+<!--                        <td>10</td>-->
+<!--                        <td class="lastCell">일일 로그인 완료</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.27 15:21</td>-->
+<!--                        <td>10</td>-->
+<!--                        <td class="lastCell">일일 로그인 완료</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.26 14:06</td>-->
+<!--                        <td>10</td>-->
+<!--                        <td class="lastCell">일일 로그인 완료</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.22 15:03</td>-->
+<!--                        <td>-50</td>-->
+<!--                        <td class="lastCell">프로젝트/스터디 좋아요 취소</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.22 15:03</td>-->
+<!--                        <td>30</td>-->
+<!--                        <td class="lastCell">워크인 좋아요</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.22 15:03</td>-->
+<!--                        <td>-50</td>-->
+<!--                        <td class="lastCell">프로젝트/스터디 좋아요 취소</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.22 15:03</td>-->
+<!--                        <td>30</td>-->
+<!--                        <td class="lastCell">워크인 좋아요</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.22 15:03</td>-->
+<!--                        <td>-50</td>-->
+<!--                        <td class="lastCell">프로젝트/스터디 좋아요 취소</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.22 15:03</td>-->
+<!--                        <td>30</td>-->
+<!--                        <td class="lastCell">워크인 좋아요</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.22 13:19</td>-->
+<!--                        <td>-50</td>-->
+<!--                        <td class="lastCell">글 삭제</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.22 13:19</td>-->
+<!--                        <td>50</td>-->
+<!--                        <td class="lastCell">글 등록</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.22 13:12</td>-->
+<!--                        <td>-100</td>-->
+<!--                        <td class="lastCell">스토리 삭제</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.22 13:12</td>-->
+<!--                        <td>100</td>-->
+<!--                        <td class="lastCell">스토리 작성</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.22 11:26</td>-->
+<!--                        <td>10</td>-->
+<!--                        <td class="lastCell">일일 로그인 완료</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.21 15:50</td>-->
+<!--                        <td>30</td>-->
+<!--                        <td class="lastCell">워크인 좋아요</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.21 14:33</td>-->
+<!--                        <td>10</td>-->
+<!--                        <td class="lastCell">일일 로그인 완료</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.20 15:14</td>-->
+<!--                        <td>10</td>-->
+<!--                        <td class="lastCell">일일 로그인 완료</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.18 11:01</td>-->
+<!--                        <td>100</td>-->
+<!--                        <td class="lastCell">상대방의 리뷰완료</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.18 11:00</td>-->
+<!--                        <td>30</td>-->
+<!--                        <td class="lastCell">워크인 좋아요</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.18 10:12</td>-->
+<!--                        <td>10</td>-->
+<!--                        <td class="lastCell">일일 로그인 완료</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.17 12:17</td>-->
+<!--                        <td>200</td>-->
+<!--                        <td class="lastCell">본 캐릭터 생성완료</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.17 12:17</td>-->
+<!--                        <td>100</td>-->
+<!--                        <td class="lastCell">회원가입 완료</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>22.04.17 12:17</td>-->
+<!--                        <td>10</td>-->
+<!--                        <td class="lastCell">일일 로그인 완료</td>-->
+<!--                    </tr>-->
                 </table>
             </div>
         </div>
@@ -1160,5 +1345,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/header.js"></script>
 <script src="/js/chat.js"></script>
+<script th:inline="javascript"> let interests = [[${interests}]]; </script>
 <script src="/js/myPage.js"></script>
 </html>

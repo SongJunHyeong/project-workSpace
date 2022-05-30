@@ -26,5 +26,7 @@
         <typeAlias type="com.project.workspace.domain.vo.LoungeReplyVO" alias="loungeReplyVO"/>
         <typeAlias type="com.project.workspace.domain.vo.LoungeLikeVO" alias="loungeLikeVO"/>
         <typeAlias type="com.project.workspace.domain.vo.NoticeVO" alias="noticeVO"/>
+        <typeAlias type="com.project.workspace.domain.vo.UserExpVO" alias="userExpVO"/>
+        <typeAlias type="com.project.workspace.domain.vo.UserPointVO" alias="userPointVO"/>
     </typeAliases>
 </configuration>

@@ -35,9 +35,9 @@ public class NoticeController {
 
     @GetMapping("/noticeList")
     public void noticeList(@PageableDefault(page = 0, size = 10, sort = "noticeNum", direction = Sort.Direction.DESC) Pageable pageable, Model model){
-        Page<NoticeVO> noticeVOS = noticeService.noticeList(pageable);
-        PageableDTO pageableDTO = new PageableDTO(pageable,(int)noticeVOS.getTotalElements());
-        model.addAttribute("noticeVOS", noticeVOS);
+        Page<NoticeVO> noticeVOs = noticeService.noticeList(pageable);
+        PageableDTO pageableDTO = new PageableDTO(pageable,(int)noticeVOs.getTotalElements());
+        model.addAttribute("noticeVOS", noticeVOs);
         model.addAttribute("pageableDTO", pageableDTO);
     }
 

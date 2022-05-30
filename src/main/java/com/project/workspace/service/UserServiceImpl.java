@@ -6,6 +6,7 @@ import com.project.workspace.domain.vo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -81,5 +82,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void insertExp(Long userNum, Date expDate, int expValue, String expHistory) {
+        userDAO.insertExp(userNum, expDate, expValue, expHistory);
+    }
+
+    @Override
+    public List<UserExpVO> getExpList() {
+        return userDAO.getExpList();
+    }
+
+    @Override
+    public void insertPoint(Long userNum, Date pointDate, int pointValue, String pointHistory, String pointStatus) {
+        userDAO.insertPoint(userNum, pointDate,pointValue,pointHistory,pointStatus);
+    }
+
+    @Override
+    public List<UserPointVO> getPointList() {
+        return userDAO.getPointList();
+    }
     public List<UserVO> getUserList(UserFilter userFilter) {return userDAO.getUserList(userFilter);}
 }

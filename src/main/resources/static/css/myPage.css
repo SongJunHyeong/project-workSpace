@@ -241,7 +241,7 @@ section#info button#profileChange {
     position: absolute;
     width: 36px;
     height: 36px;
-    background-image: url(../../static/images/profileChange.png);
+    background-image: url('static/images/profileChange.png');
     background-size: cover;
     border: none;
     border-radius: 1rem;
@@ -599,6 +599,7 @@ div.projectImg {
     display: inline-flex;
     max-height: 120px;
     height: 100%;
+    width:100%;
 }
 
 div.projectImg img {
@@ -958,7 +959,10 @@ section#score table td{
     word-wrap: break-word;
     color: #b5b5c2;
     word-break: normal;
+    display: -webkit-inline-box;
     font-weight: 600;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
 .timeLineTagWrap{
     color: #222;

@@ -23,7 +23,7 @@ $(".storyViewWrap").on("click", ".activeInputBtn", function (e) {
             return;
         } else {
             storyService.insertReply({
-                storyReply: storyReply, userNum: 1, storyNum: storyNum
+                storyReply: storyReply, userNum: userNum, storyNum: storyNum
             }, function (result) {
                 alert(result);
                 getList(storyNum);
@@ -149,15 +149,25 @@ function getList(storyNum) {
             str += "<img  class='activInputImg' src='/images/여.png'>";
             str += "</div>";
             str += "<div class='activeInputTxt'>";
-            str += "<textarea maxlength='500' rows='2' placeholder='댓글을 작성해주세요' class='activeInputTextArea'></textarea>";
+            if (userNum == null) {
+                str += "<textarea maxlength='500' rows='2' placeholder='로그인 후 댓글 작성이 가능합니다' class='activeInputTextArea noSessionId'></textarea>";
+            }else {
+                str += "<textarea maxlength='500' rows='2' placeholder='댓글을 작성해주세요' class='activeInputTextArea'></textarea>";
+            }
             str += "<button class='activeInputBtn'>등록</button>";
             str += "</div>";
             str += "</div>";
-
-
             $(".rpyAtiveWrap").html(str);
         })
 }
+
+//댓글 수정,삭제
+// str += "<div class='replyBtnWraps'>";
+// str += "<p class='txtBtns modifys'>수정</p>";
+// str += '<div class="sell">｜</div>';
+// str += "<p class='txtBtns removes'>삭제</p>";
+// str += "<button class='activeInputBtns'>수정완료</button>";
+// str += "</div>";
 
 $(".rpyAtiveWrap").on("click", ".noSessionId", function () {
     $(".modalWrapOpen").show();

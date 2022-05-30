@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name = "tbl_user")
 @Getter
 @Setter
-@ToString(exclude = {"ports", "tags", "alerts", "interests", "users", "projects", "projectMembers","projectLikes","stories","replies","series","storyReplies","studies","studyMembers","lounges","loungeLikes" ,"loungeReplies"})
+@ToString(exclude = {"ports", "tags", "alerts", "interests", "users", "projects", "projectMembers","projectLikes","stories","replies","series","storyReplies","studies","studyMembers","lounges","loungeLikes" ,"loungeReplies","exp","point"})
 @NoArgsConstructor
 @AllArgsConstructor
 @DynamicInsert
@@ -69,6 +69,10 @@ public class UserVO {
     @Column(name = "user_img_path")
     private String userImgPath;
 
+    @OneToMany(mappedBy = "userVO")
+    private List<UserPointVO> point = new ArrayList<>();
+    @OneToMany(mappedBy = "userVO")
+    private List<UserExpVO> exp = new ArrayList<>();
     @OneToMany(mappedBy = "userVO")
     private List<UserPortfolioVO> ports = new ArrayList<>();
     @OneToMany(mappedBy = "userVO")

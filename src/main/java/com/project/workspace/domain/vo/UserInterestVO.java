@@ -1,19 +1,18 @@
 package com.project.workspace.domain.vo;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
 @Entity
 @Component
-@Table(name = "tbl_userInterest")
+@Table(name = "tbl_user_interest")
 @Getter
+@Setter
 @ToString(of = {"interestNum","interest"})
 @NoArgsConstructor
+
 public class UserInterestVO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

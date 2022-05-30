@@ -42,7 +42,7 @@
     <insert id="insertInterest">
         insert into tbl_user_interest
         (user_num, interest)
-        values(#{userNum}, #{interest});
+        values(#{userNum}, #{interest})
     </insert>
     <!--관심사 리스트-->
     <select id="getInterestList" resultType="userInterestVO">
@@ -54,7 +54,7 @@
     <insert id="insertFollow">
         insert into tbl_follow_user
         (follower_user, following_user)
-        values(#{followerUser}, #{followingUser});
+        values(#{followerUser}, #{followingUser})
     </insert>
     <!--팔로우 리스트-->
     <select id="getFollowList" resultType="userFollowVO">
@@ -66,13 +66,34 @@
     <insert id="insertAlert">
     insert into tbl_user_alert
     (user_num, alert_part, numbers, alert_type)
-    values(#{userNum}, #{alertPart}, #{numbers}, #{alertType});
+    values(#{userNum}, #{alertPart}, #{numbers}, #{alertType})
     </insert>
     <!--알림 리스트-->
     <select id="getAlertList" resultType="userAlertVO">
         select * from tbl_user_alert
     </select>
 
+    <!-- exp 리스트  -->
+    <select id="getExpList" resultType="userExpVO">
+         select * from tbl_user_exp
+    </select>
+    <!-- exp 추가   -->
+    <insert id="insertExp">
+     insert into tbl_user_exp
+    (user_num, exp_date, exp_value, exp_history)
+    values(#{userNum},#{expDate},#{expValue},#{expHistory})
+    </insert>
+
+    <!-- point list   -->
+    <select id="getPointList" resultType="userPointVO">
+         select * from tbl_user_point
+    </select>
+    <!-- point 추가   -->
+    <insert id="insertPoint">
+    insert into tbl_user_point
+    (user_num, point_date, point_value, point_history, point_status)
+    values(#{userNum}, #{pointDate}, #{pointValue}, #{pointHistory},#{pointStatus})
+    </insert>
     <!--  kakao로 받아온 정보 userVO에 넣기-->
     <insert id="kakaoJoin">
         insert into tbl_user

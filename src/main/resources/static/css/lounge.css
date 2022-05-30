@@ -168,7 +168,7 @@ textarea {
 }
 
 .up{
-    background-image: url(../../static/images/up.png);
+    background-image: url('/static/images/up.png');
 }
 .profileWraps{
     width: 28px;
@@ -289,6 +289,41 @@ textarea {
     padding-right: 5px;
     box-sizing: border-box;
 }
+.replyBtnWraps{
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 13px;
+    align-items: center;
+    padding-right: 5px;
+    box-sizing: border-box;
+}
+.activeInputBtns{
+    background-color: #336d47;
+    color: #fff;
+    border: 1px solid #336d47;
+    width: auto;
+    padding: 8px 29px!important;
+    transition: all .2s;
+    font-size: .75rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.activeInputBtnss{
+    background-color: #336d47;
+    color: #fff;
+    border: 1px solid #336d47;
+    width: auto;
+    padding: 8px 29px!important;
+    transition: all .2s;
+    font-size: .75rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 .time{
     font-size: .75rem;
     color: #c9c9d9;
@@ -319,12 +354,36 @@ textarea {
     border: none;
     font-size: 14px;
     margin-bottom: 0 !important;
-   
+}
+.txtBtns{
+    /* border: 1px solid #eeee; */
+    border: none;
+    font-size: 14px;
+    margin-bottom: 0 !important;
 }
 .modify{
     cursor: pointer;
 }
 .remove{
+    cursor: pointer;
+}
+
+.activeTxtBtnImg {
+    width: 20px;
+}
+
+.activesBtn{
+    background-color: #fff;
+    /* border: 1px solid #eeee; */
+    border: none;
+    font-size: 14px;
+    margin-bottom: 0 !important;
+
+}
+.modifys{
+    cursor: pointer;
+}
+.removes{
     cursor: pointer;
 }
 

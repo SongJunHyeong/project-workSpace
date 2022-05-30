@@ -7,6 +7,7 @@ let storyService = (function () {
             success: function (storyDTO) {
                 console.log(storyDTO);
                 if (callback) {
+                    console.log("callback 들어옴");
                     callback(storyDTO.storyVO, storyDTO.userVO, storyDTO.storyTagVOs, storyDTO.storyLikeSize, storyDTO.storyReplySize);
                 }
             },

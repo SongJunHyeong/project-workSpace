@@ -5,6 +5,7 @@ import com.project.workspace.domain.vo.*;
 import com.project.workspace.domain.vo.UserPortfolioVO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -28,6 +29,12 @@ public interface UserMapper {
 
     public void insertAlert(Long userNum , String alertPart, Long numbers, String alertType);
     public List<UserAlertVO> getAlertList();
+
+    public List<UserExpVO> getExpList();
+    public void insertExp(Long userNum, Date expDate, int expValue, String expHistory);
+
+    public List<UserPointVO> getPointList();
+    public void insertPoint(Long userNum, Date pointDate, int pointValue, String pointHistory, String pointStatus);
 
     public List<UserVO> getUserList(UserFilter userFilter);
 }

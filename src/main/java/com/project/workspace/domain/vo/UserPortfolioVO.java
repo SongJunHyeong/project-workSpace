@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Component
 @Table(name = "tbl_portfolio")
 @Getter
+@Setter
 @ToString(of = {"portNum","portUrl"})
 @NoArgsConstructor
 public class UserPortfolioVO {

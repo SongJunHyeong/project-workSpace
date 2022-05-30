@@ -364,6 +364,15 @@
 <!--                                <textarea maxlength="500" rows="2" placeholder="댓글을 작성해주세요" class="activeInputTextArea"></textarea>-->
 <!--                                <button class="activeInputBtn">등록</button>-->
 <!--                            </div>-->
+                <!--   **댓글 수정 삭제**             -->
+<!--                <div class="replyBtnWraps">-->
+<!--                    <p class="txtBtns modifys">수정</p>-->
+<!--                    <button class="activeInputBtns">수정완료</button>-->
+<!--                    <div class="sell">｜</div>-->
+<!--                    <p class="txtBtns removes">삭제</p>-->
+<!--                </div>-->
+<!--                **여기까지-->
+
 <!--                        </div>-->
 <!--                        &lt;!&ndash; s &ndash;&gt;-->
 <!--                    </div>-->
@@ -373,6 +382,10 @@
 
 
 <!--            </div>-->
+
+
+
+
             <!--라운지 랭킹-->
             <!-- <div class="loungeLankWrap"> -->
             <div class="loungeLank">
@@ -483,10 +496,12 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script th:inline="javascript">
-    let loungeVOs = [[${loungeVOs}]];
-    let loungeLikesNum = [[${loungeLikesNum}]];
-    let loungeRepliesNum = [[${loungeRepliesNum}]];
-    let loungeUserNickNames = [[${loungeUserNickNames}]];
+    let userNum = [[${session.userNum}]]
+    let loungeVOs = [[${loungeVOs}]]
+    let loungeLikesNum = [[${loungeLikesNum}]]
+    let loungeRepliesNum = [[${loungeRepliesNum}]]
+    let loungeUserNickNames = [[${loungeUserNickNames}]]
+    console.log(userNum)
 
     console.log(loungeVOs.length);
     console.log(loungeVOs[0]);
