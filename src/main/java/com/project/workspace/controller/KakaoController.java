@@ -7,6 +7,7 @@ import com.project.workspace.domain.repository.UserInterestRepository;
 import com.project.workspace.domain.repository.UserPortfolioRepository;
 import com.project.workspace.domain.repository.UserRepository;
 import com.project.workspace.domain.vo.*;
+import com.project.workspace.service.KakaoLogOut;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.User;
@@ -46,6 +47,9 @@ public class KakaoController {
     private final UserRepository userRepository;
     private final UserInterestRepository userInterestRepository;
     private final UserPortfolioRepository userPortfolioRepository;
+    private final KakaoLogOut kakaoLogOut;
+
+
 
     @GetMapping("/login")
     public RedirectView kakaoLogin(String code, Model model, HttpServletRequest req, RedirectAttributes rttr){ //Data를 리턴해주는 컨트롤러
@@ -98,9 +102,12 @@ public class KakaoController {
         RestTemplate rt2 = new RestTemplate();
 
         //HttpHeader 오브젝트 생성
+        HttpSession session = req.getSession();
         HttpHeaders headers2 = new HttpHeaders();
+        session.setAttribute("access_Token", oauthToken.getAccess_token());
         headers2.add("Authorization", "Bearer "+ oauthToken.getAccess_token());
         headers2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+
 
         //HttpHeader와 HttpBody를 하나의 오브젝트에 담기
         HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest2 =
@@ -148,8 +155,6 @@ public class KakaoController {
             url = "joinForm";
 
         }else{
-
-            HttpSession session = req.getSession();
 
             session.setAttribute("userNum", userVO.getUserNum());
             session.setAttribute("profile", userVO);
@@ -252,6 +257,28 @@ public class KakaoController {
         session.invalidate();
         return new RedirectView("main/index");
     }
+
+//    @GetMapping("/logOut")
+//    public RedirectView logOut(HttpServletRequest req){
+//        HttpSession session = req.getSession();
+////        String access_Token = (String)session.getAttribute("access_Token");
+////        Long userNum = (Long)session.getAttribute("userNum");
+//
+////        if(access_Token != null && !"".equals(access_Token)){
+////            KakaoLogOut.kakaoLogout(access_Token);
+////            log.info("access_Token 삭제 전" + (String)session.getAttribute("access_Token"));
+////            log.info("userNum 삭제 전"+session.getAttribute("userNum").toString());
+//            session.invalidate();
+////            log.info("access_Token 삭제 후" + (String)session.getAttribute("access_Token"));
+////            log.info("userNum 삭제 후"+session.getAttribute("userNum").toString());
+////        }else{
+////            System.out.println("access_Token is null");
+////            return "redirect:/";
+////        }
+//
+////        session.invalidate();
+//        return new RedirectView("main/index");
+//    }
 
     //    아임포트 사용시 포인트 올라가는 컨트롤러
     @GetMapping("/charge")
