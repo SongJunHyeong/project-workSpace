@@ -72,7 +72,7 @@ a{
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    height: 266px;
+    height: 253px;
     box-sizing: border-box;
     padding-bottom: 70px;
     position: relative;
@@ -251,9 +251,6 @@ a{
     margin-bottom: 0;
     font-weight: 700;
 }
-/* .contentsProNamePtag{
-    font-family: 'GmarketSansMedium';
-} */
 .contentsPro{
     display: block;
     font-size: 13px;
@@ -516,7 +513,7 @@ margin-right: 16px;
     margin-left: 3px;
 }
 /* 스토리삭제확인모달 */
-#modalStory2Page{
+#modalStory1Page ,#modalStory2Page, #modalStory4Page{
     position: absolute;
     text-align: center;
     width: 387px;
@@ -529,20 +526,20 @@ margin-right: 16px;
     left: 41%;
 }
 
-#modalStory2Page .modalStoryCloseBtn2{
+#modalStory1Page .modalStoryCloseBtn1, #modalStory2Page .modalStoryCloseBtn2, #modalStory2Page .modalStoryCloseBtn4{
     bottom: 25px;
     right: 165px;
 }
 
 
-img.xIcons2{
+img.xIcons1, img.xIcons2, img.xIcons4{
     position: relative;
     width: 25px;
     right: -170px;
     top: -13px;
 }
 
-div.modalStory2{
+div.modalStory1, div.modalStory2, div.modalStory4{
     position: fixed;
     top: 0;
     left: 0;
@@ -554,14 +551,14 @@ div.modalStory2{
 }
 
 
-a.modalStoryCloseBtn2{
+a.modalStoryCloseBtn1, a.modalStoryCloseBtn2, a.modalStoryCloseBtn4{
     text-decoration: none;
     color: #8e8ea2;
     cursor: pointer;
 }
 
 
-p.completePStory2{
+p.completePStory1, p.completePStory2, p.completePStory4{
     font-size: 1.125rem;
     color: #42495b;
     font-weight: 700;
@@ -570,7 +567,7 @@ p.completePStory2{
 }
 
 
-button.mdBtnStoryBtn2{
+button.mdBtnStoryBtn1, button.mdBtnStoryBtn2, button.mdBtnStoryBtn4{
     width: 260px;
     height: 44px;
     border: none;
@@ -1058,6 +1055,19 @@ ul.hoverUl li a {
 ul.hoverUl li a:hover {
     background-color: #f1f8e9;
     text-decoration: none !important;
+}
+
+textarea.modify{
+    box-sizing: border-box;
+    flex: 1 1;
+    padding: 13px 16px;
+    background: #fff;
+    border: 1px solid #c9c9d9;
+    font-size: .875rem;
+    border-radius: 4px;
+    height: 100%;
+    resize: none;
+    cursor: auto;
 }
 
 /* 미디어쿼리 */

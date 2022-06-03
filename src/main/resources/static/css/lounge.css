@@ -66,7 +66,7 @@ textarea {
     height: 100%;
     resize: none;
 }
-.loungeBtn1{
+.loungeBtn1, .loungeBtn2{
     background-color: #336d47;
     color: #fff;
     width: 80px;
@@ -350,9 +350,7 @@ textarea {
 
 .txtBtn{
     background-color: #fff;
-    /* border: 1px solid #eeee; */
     border: none;
-    font-size: 14px;
     margin-bottom: 0 !important;
 }
 .txtBtns{
@@ -590,6 +588,209 @@ textarea.modify{
     height: 100%;
     resize: none;
     cursor: auto;
+}
+
+#modalStory4Page, #modalStory5Page, #modalStory6Page{
+    position: absolute;
+    text-align: center;
+    width: 387px;
+    padding: 26px 30px 74px;
+    background-color: #fefefe;
+    border: 1px solid #888;
+    border-radius: 8px;
+    height: 215px;
+    top: 30%;
+    left: 41%;
+}
+
+#modalStory4Page .modalStoryCloseBtn4, #modalStory5Page .modalStoryCloseBtn5, #modalStory6Page .modalStoryCloseBtn6{
+    bottom: 25px;
+    right: 165px;
+}
+
+
+img.xIcons4, img.xIcons5, img.xIcons6{
+    position: relative;
+    width: 25px;
+    right: -170px;
+    top: -13px;
+}
+
+div.modalStory4, div.modalStory5, div.modalStory6{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    display: none;
+}
+
+
+a.modalStoryCloseBtn4, a.modalStoryCloseBtn5, a.modalStoryCloseBtn6{
+    text-decoration: none;
+    color: #8e8ea2;
+    cursor: pointer;
+}
+
+
+p.completePStory4, p.completePStory5, p.completePStory6{
+    font-size: 1.125rem;
+    color: #42495b;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.25rem;
+}
+
+
+button.mdBtnStoryBtn4, button.mdBtnStoryBtn5, button.mdBtnStoryBtn6{
+    width: 260px;
+    height: 44px;
+    border: none;
+    color: #fff;
+    background-color: #00704a;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+div.modalWrapOpen{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 99999;
+    display: none;
+}
+
+p.modalTit {
+    font-size: 1.125rem;
+    color: #42495b;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.25rem;
+}
+
+button.closeBtn {
+    width: 25px;
+    height: 25px;
+    background: none;
+    border: none;
+    position: absolute;
+    top: 20px;
+    right: 21px;
+    cursor: pointer;
+}
+
+button.closeBtn img{
+    width:100%;
+}
+
+div.commonModalContent p {
+    font-size: .75rem;
+    color: #8e8ea2;
+    text-align: center;
+    line-height: 1rem;
+}
+
+div.modalWrapOpen{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.5);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 99999;
+    display: none;
+}
+
+div.commonModal{
+    padding: 60px 20px 40px;
+    background-color: #fff;
+    box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+    border-radius: 8px;
+    max-width: 410px;
+    min-width: 320px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition: all .2s;
+    z-index: 999999;
+}
+
+p.modalTit {
+    font-size: 1.125rem;
+    color: #42495b;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.25rem;
+}
+
+button.closeBtn {
+    width: 25px;
+    height: 25px;
+    background: none;
+    border: none;
+    position: absolute;
+    top: 20px;
+    right: 21px;
+    cursor: pointer;
+}
+
+button.closeBtn img{
+    width:100%;
+}
+
+div.commonModalContent p {
+    font-size: .75rem;
+    color: #8e8ea2;
+    text-align: center;
+    line-height: 1rem;
+}
+
+div.btnWrap {
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+div.btnWrap button.whiteBtn {
+    border: 1px solid #00704a;
+    color: #00704a;
+    background-color: #fff;
+    height: 44px;
+    width: 49%;
+    box-sizing: border-box;
+    font-size: .75rem;
+    padding: 0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+div.btnWrap button.redBtn {
+    background-color: #00704a;
+    color: #fff;
+    height: 44px;
+    width: 49%;
+    border: none;
+    box-sizing: border-box;
+    font-size: .75rem;
+    padding: 0;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 /* 미디어쿼리 */

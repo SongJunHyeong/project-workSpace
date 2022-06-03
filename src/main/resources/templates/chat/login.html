@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<div style="margin: 100px auto;text-align: center">
+    <input type="text"  id="userId" name="userId"><br><br>
+<input type="password" id="pw" name="pw"><br><br>
+<input type="button" id="btn" value="로그인">
+</div>
+</body>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script>
+
+    document.getElementById("btn").addEventListener("click", function() {
+
+        let id = document.getElementById("userId").value;
+        let pw = document.getElementById("pw").value;
+
+        console.log(id , pw)
+        let sessionData = "mineItRecord";
+
+
+        let v = {
+            "userId" : id,
+            "userPw" : pw
+        }
+
+
+        let jv = JSON.stringify(v);
+        $.ajax({
+            type: "POST",
+            url: "/login",
+            data: jv,
+            contentType: 'application/json',
+            success: function() {
+                alert('로그인 성공');
+
+                sessionStorage.setItem("mineSession", id );
+                location.href = "/home";
+
+            },
+            error: function(err) {
+                    console.log(err)
+                alert('로그인 정보가 올바르지 않습니다.');
+            }
+        });
+    });
+</script>
+</html>

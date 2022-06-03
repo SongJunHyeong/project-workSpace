@@ -1,5 +1,6 @@
 package com.project.workspace.domain.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.stereotype.Component;
@@ -69,45 +70,65 @@ public class UserVO {
     @Column(name = "user_img_path")
     private String userImgPath;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "userVO")
     private List<UserPointVO> point = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "userVO")
     private List<UserExpVO> exp = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "userVO")
     private List<UserPortfolioVO> ports = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "userVO")
     private List<UserTagVO> tags = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "userVO")
     private List<UserAlertVO> alerts = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "userVO")
     private List<UserInterestVO> interests = new ArrayList<>();
+    @JsonIgnore
     @OneToMany
     @JoinColumn(name = "following_user")
     private List<UserFollowVO> users = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "userVO")
     private List<ProjectVO> projects = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "userVO")
     private List<ProjectMemberVO> projectMembers = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "userVO")
     private List<ProjectLikeVO> projectLikes = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "userVO")
     private List<StoryVO> stories = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "userVO")
     private List<StoryReplyVO> replies = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "userVO")
     private List<StorySeriesVO> series = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "userVO")
     private List<StoryLikeVO> storyReplies = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "userVO")
     private List<StudyVO> studies = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "userVO")
     private List<StudyMemberVO> studyMembers = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "userVO")
     private List<LoungeVO> lounges = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "userVO")
     private List<LoungeLikeVO> loungeLikes = new ArrayList<>();
+    @JsonIgnore
     @OneToMany(mappedBy = "userVO")
     private List<LoungeReplyVO> loungeReplies = new ArrayList<>();
+
 
     @Builder
     public UserVO(String userId, String userContent, String userLocation, String userNickName, String userPhone, String userMainSkill, String userMainDetail, String userMainLevel, String userSubSkill, String userSubDetail, String userSubLevel, String userOnOff, String userTime, String userCode, Long userPrice, String socialType, String userStatus, String userImgUuid, String userImgName, String userImgPath) {

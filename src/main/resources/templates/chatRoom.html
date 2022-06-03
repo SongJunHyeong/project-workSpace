@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>채팅 서비스</title>
+    <!-- Bootstrap core CSS -->
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">-->
+
+    <!-- 부가적인 테마 -->
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">-->
+
+    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+
+<div class="chatingRoom" id="chatingRoom">
+    <div class="chating" id="chating">
+
+
+    </div>
+    <hr style="border: 0;  height: 0.5px;  width: 92%;  background-color: #ddd;">
+
+    <div class="chatinput" id="chatinput">
+        <script>
+            document.getElementById('chatinput').innerHTML = `
+             <input type="text" class="chattext" id="message" placeholder="대화를 입력">
+
+                    <button id="send">전송</button>`
+        </script>
+
+    </div>
+
+</div>
+</body>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<style>
+    /*body{*/
+    /*    font-size: 100%;*/
+    /*    font: inherit;*/
+    /*    vertical-align: baseline;*/
+    /*    font-family: 'GmarketSansLight', sans-serif;*/
+    /*}*/
+    .chatinput {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        padding: 14px 24px;
+        display: inline-flex;
+        box-sizing: border-box;
+        align-items: flex-end;
+        justify-content: space-between;
+        background-color: #fff;
+    }
+
+    .chatinput input {
+        border-color: #ddd;
+        background-color: #fff;
+    }
+
+    .chatinput input::placeholder {
+        font-size: 15px;
+    }
+
+    .chatinput button {
+        border: none;
+        background-color: #336d47;
+        color: #fff;
+        border-radius: 4px;
+        font-weight: 700;
+    }
+
+    .chating {
+        height: 410px;
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: auto;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 5px 22px;
+    }
+
+    .chatingRoom {
+        height: 660px;
+        position: relative;
+        width: 100%;
+        display: block;
+    }
+
+    #message {
+        height: 40px;
+        width: 280px;
+        font-size: 16px;
+    }
+
+    #send {
+        height: 40px;
+        width: 55px;
+    }
+</style>
+
+<script>
+
+    let chatings = document.querySelector('.chating');
+    let other = sessionStorage.getItem("other");
+    let mysession = sessionStorage.getItem("mysession");
+    let roomid = sessionStorage.getItem("roomNames");
+
+    chatings = document.querySelector('.chating');
+    other = sessionStorage.getItem("other")
+    myName = sessionStorage.getItem("myName")
+    roomid = sessionStorage.getItem("roomNames")
+
+    console.log(other)
+
+    let today = new Date();
+    let year = today.getFullYear(); // 년도
+    let month = today.getMonth() + 1;  // 월
+    let date = today.getDate();  // 날짜
+    let day = today.getDay();  // 요일
+    let hours = today.getHours(); // 시
+    let minutes = today.getMinutes();  // 분
+    let time = `${month}월${date}일 ${hours}:${minutes}`
+
+    let ttime = ` ${hours}:${minutes}`
+
+    //채팅가져오기
+    function letdata() {
+        let chatdata = "";
+        $.ajax({
+            url: `/messageList/${mysession}/${other}`,
+            dataType: "json",
+            type: "get",
+            async: false,
+            success: function (data) {
+                chatdata = data
+
+
+            },
+            error: function () {
+                alert("실패");
+            }
+        });
+        //채팅출력
+        chatdata?.map((c) => {
+
+            let message = c.message;
+            let senderId = c.senderId;
+
+            mysession === senderId ? chatings.innerHTML += `
+         <div style="width:99%">
+            <div style="text-align: right;    margin-top: 20px;">
+        <span style="line-height: 40px;    display: inline-block; width: 80%;   padding: 0px 5px;    height: 45px;     font-size: 17px;"  id="sender"><span style="font-size: 10px;">${c.chatTime}</span> &nbsp;&nbsp;&nbsp; ${message}</span> <br/>
+        </div></div>` :
+                chatings.innerHTML += `
+            <div style="text-align:left; margin-top: 10px;
+           width: 80%;padding: 5px;
+             ">
+            <span style="font-size: 17px;font-weight: bold ">${senderId}</span> <br/>
+            <span style="font-size: 17px;">${message}</span>&nbsp;&nbsp;<span style="font-size:10px;">${c.chatTime}</span>
+
+            </div>`
+
+
+        })
+    }
+
+    letdata()
+
+    //여기까지 완벽
+    let webSocket;
+    let nickname = mysession
+    let roomId = roomid;
+
+
+    $(document).ready(function () {
+        connect();
+
+        document.getElementById('chating').scrollTop = document.getElementById('chating').scrollHeight;
+        document.getElementById('message').focus()
+
+        document.getElementById('message').addEventListener('keyup', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                send();
+            }
+        })
+
+    })
+
+
+    document.getElementById("send").addEventListener("click", function () {
+        send(mysession, other);
+    })
+
+    function connect() {
+        webSocket = new WebSocket("ws://localhost:7777/chat");
+        webSocket.onopen = onOpen;
+        webSocket.onclose = onClose;
+        webSocket.onmessage = onMessage;
+
+
+    }
+
+    function disconnect() {
+        webSocket.send(JSON.stringify({chatRoomId: roomId, type: 'LEAVE', writer: nickname}));
+        webSocket.close();
+
+
+    }
+
+    function send() {
+        msg = document.getElementById("message").value;
+
+        if (!msg) {
+            alert("내용을 입력해주세요")
+            return false;
+
+        }
+
+        webSocket.send(JSON.stringify({
+            chatRoomId: roomId,
+            type: 'CHAT',
+            writer: nickname,
+            message: msg,
+            chatTime: time
+
+        }));
+
+
+        let data = {
+            message: msg,
+            roomName: roomId,
+            chatTime: time,
+            senderId: mysession,
+            receiverId: other
+        }
+
+
+        let JSONData = JSON.stringify(data)
+        $.ajax({
+            type: "POST",
+            url: `/chatSave/${mysession}/${other}`,
+            data: JSONData,
+
+            contentType: "application/json",
+            success: function () {
+                document.getElementById('message').value = ""
+
+            },
+            error: function (err) {
+                alert("실패")
+                console.log(err)
+                console.log(this.url);
+            }
+
+        })
+
+
+    }
+
+    function onOpen() {
+
+        webSocket.send(JSON.stringify({chatRoomId: roomId, type: 'ENTER', writer: nickname}));
+
+
+    }
+
+
+    function onMessage(e) {
+
+        let data = e.data;
+
+
+        let date = JSON.parse(data)
+        console.log(date.split("&")[1])
+
+        datas = date.split(":")[1]
+
+        chatroom = document.getElementById("chatroom");
+        date?.search(nickname) ?
+            chatings.innerHTML += `
+                <div style="text-align:left; margin-top: 10px;
+                padding: 5px; width: 100%;
+                 ">
+
+                <span style="font-size: 15px;">${date} <span style="font-size: 10px;">${ttime}</span></span>
+
+                </div>` :
+            chatings.innerHTML += `
+             <div style="width:99%">
+                <div style="text-align: right;  width: 100%;   margin-top: 10px;">
+                <span style="font-size: 10px;">${ttime}</span>
+            <span style="line-height: 40px;    display: inline-block;         padding: 0px 5px;    height: 45px;     font-size: 17px;"  id="senderText">${datas}</span> <br/>
+            </div></div>`
+
+        document.getElementById('chating').scrollTop = document.getElementById('chating').scrollHeight;
+
+
+    }
+
+    function onClose(e) {
+
+        disconnect();
+    }
+
+</script>
+</html>

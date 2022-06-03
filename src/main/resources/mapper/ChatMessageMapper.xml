@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.workspace.mapper.ChatMessageMapper">
+    <!--    sender, receiver, roomName 저장-->
+    <insert id="insertRoom" >
+        INSERT INTO chat_message
+        (sender_id, receiver_id, room_name)
+        VALUES(#{senderId}, #{receiverId}, #{roomName})
+    </insert>
+
+    <!--    채팅 저장 -->
+    <insert id="insertChatMessage">
+       INSERT INTO chat_message
+        (message, chat_time, user_num, room_name, chat_file)
+        VALUES(#{message}, #{chat_time}, #{user_num}, #{room_name}, #{chat_file})
+    </insert>
+
+    <!-- 로그인 후 채팅방 목록 가져오기-->
+    <select id="getMyChatList" resultType="chatMessageVO">
+        select room_name  from chat_message
+        where sender_id = #{senderId} or receiver_id = #{receiverId}
+        group by room_name
+    </select>
+
+    <!-- 상대방 눌렀을때 -->
+    <select id="getConnectRoomName" resultType="chatMessageVO">
+        select room_name from chat_message
+        where (sender_id = #{senderId} and receiver_id = #{receiverId})
+        or (sender_id = #{receiverId} and receiver_id =#{senderId})
+        group by room_name
+    </select>
+
+    <!--    채팅 가져오기-->
+    <select id="getChatList" resultType="chatMessageMyBatisVO" >
+        select message_num, message, chat_time, sender_id , receiver_id, chat_file, room_name from chat_message
+        where (sender_id = #{senderId} and receiver_id = #{receiverId})
+        or (sender_id = #{receiverId} and receiver_id = #{senderId})
+        order by message_num;
+    </select>
+
+    <!--    너와 나의 채팅 이력 유무 확인-->
+    <select id="getChatHistory" resultType="_int">
+        select count(room_name) from chat_message
+        where (sender_id = #{senderId} and receiver_id = #{receiverId})
+        or (sender_id = #{receiverId} and receiver_id = #{senderId})
+    </select>
+
+</mapper>

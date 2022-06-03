@@ -23,6 +23,28 @@
         </div>
     </div>
 </div>
+<!-- 스토리댓글수정확인모달 -->
+<div class="modalStory1 modals">
+    <div id="modalStory1Page">
+        <a class="modalStoryCloseBtn1"><img src="/images/free-icon-font-cross-3917759.png" class="xIcons1 xBtns"></a>
+        <div class="storyLetter1">
+            <p class="completePStory1">수정되었습니다.</p>
+
+            <button class="mdBtnStoryBtn1 xBtns">확인</button>
+        </div>
+    </div>
+</div>
+<!-- 스토리댓글삭제확인모달 -->
+<div class="modalStory4 modals">
+    <div id="modalStory4Page">
+        <a class="modalStoryCloseBtn4"><img src="/images/free-icon-font-cross-3917759.png" class="xIcons4 xBtns"></a>
+        <div class="storyLetter4">
+            <p class="completePStory4">삭제되었습니다.</p>
+
+            <button class="mdBtnStoryBtn4 xBtns">확인</button>
+        </div>
+    </div>
+</div>
 <!-- 스토리삭제중모달. -->
 <div class="modalStory3 modals">
     <div id="modalStory3Page">
@@ -174,7 +196,7 @@
                                           th:text="${list.getUserVO().getUserNickName()}"></span>
                                     <p class="timeLineTit" th:text="${list.getStoryTitle()}"></p>
                                 </div>
-                                <div class="timeLineTxt">[[${list.getStoryContent()}]]</div>
+                                <div class="timeLineTxt" th:utext="${list.getStoryContent()}"></div>
                                 <div class="timeLineTagWrap">
                                     <th:block th:each="tag:${list.getTags()}">
                                         <span th:text="|#${tag.getTagName()}|"></span>

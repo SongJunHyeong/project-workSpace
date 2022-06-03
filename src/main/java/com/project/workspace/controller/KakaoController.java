@@ -289,6 +289,10 @@ public class KakaoController {
 
         UserVO userVO = userRepository.findByUserNum(userNum);
         Long userPoint = userVO.getUserPoint() + price;
+
+
+        userVO.setUserPoint(userPoint);
+
         Long userExp = userVO.getUserExp() + workPoint;
 
         userVO.setUserPoint(userPoint);

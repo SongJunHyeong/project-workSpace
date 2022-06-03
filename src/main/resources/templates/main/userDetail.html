@@ -3,26 +3,26 @@
 
 <head>
     <meta charset="UTF-8" name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <title>userview</title>
-    <link rel="stylesheet" href="/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="/css/main.css" type="text/css"/>
     <link rel="stylesheet" href="/css/header.css" type="text/css">
     <link rel="stylesheet" href="/css/footer.css" type="text/css">
     <link rel="stylesheet" href="/css/chat.css" type="text/css">
-    <link rel="stylesheet" href="/css/userview.css" type="text/css" />
+    <link rel="stylesheet" href="/css/userview.css" type="text/css"/>
 </head>
 <!--헤더-->
 <th:block th:insert="/fix/header.html :: headFragment"/>
 
 <body>
-    <section class="userViewWrap">
-      <div class="userProInfo">
-          <!-- 프로필 이미지부분 -->
-            <div class="userPro">
-                <div class="userProImg">
-                    <img src="/images/여.png">
-                </div>
-           
+<section class="userViewWrap">
+    <div class="userProInfo">
+        <!-- 프로필 이미지부분 -->
+        <div class="userPro">
+            <div class="userProImg">
+                <img src="/images/여.png">
+            </div>
+
             <a class="userLikeWrap">
                 <div class="userLike"></div>
             </a>
@@ -36,18 +36,19 @@
                         <span>번호 미인증</span>
                     </div>
                 </div>
-                    <!-- p -->
-                    <p class="userProName" th:text="${user.userNickName}">
-                        <img src="/images/level_6.png">
-                    </p>
-                    <p class="userLogin">
-                        마지막 로그인 : 오늘
-                    </p>
-                    <div class="userProChatBtnWrap">
-                        <button class="userProPinkBtn">1대1대화</button>
-                        <button class="userProBlueBtn">모임초대</button>
-                    </div>
-                
+                <!-- p -->
+                <p class="userProName" id="userProName" th:text="${user.userNickName}">
+                    <img src="/images/level_6.png">
+                </p>
+                <p class="userLogin">
+                    마지막 로그인 : 오늘
+                </p>
+                <div class="userProChatBtnWrap">
+                    <button class="userProPinkBtn" id="userProPinkBtn">1대1대화</button>
+                    <button class="userProBlueBtn">모임초대</button>
+                </div>
+
+
             </div>
             <!-- 정보, 스토리 선택 -->
             <div class="userPageTab">
@@ -58,245 +59,246 @@
             </div>
             <!-- 정보 -->
             <div class="activePage">
-            <div class="userSummry ">
-                <div class="userSummryWrap">
-                    <ul class="userSummryUl">
-                        <li class="liTit">
+                <div class="userSummry ">
+                    <div class="userSummryWrap">
+                        <ul class="userSummryUl">
+                            <li class="liTit">
                             <span>
                                 <strong>[ 메인 캐릭터 ]</strong>
                             </span>
-                        </li>
-                        <li class="userSummryLi">
-                            <span>파 트</span><span class="spangray" th:text="${user.userMainSkill}"></span>
-                        </li>
-                        <li class="userSummryLi">
-                            <span>직 무</span><span class="spangray" th:text="${user.userMainDetail}"></span>
-                        </li>
-                        <li class="userSummryLi">
-                            <span>능력치</span>
-                            <span class="spangray" th:if="${user.userMainLevel=='1'}">초보</span>
-                            <span class="spangray" th:if="${user.userMainLevel=='2'}">중수</span>
-                            <span class="spangray" th:if="${user.userMainLevel=='3'}">고수</span>
-                            <span class="spangray" th:if="${user.userMainLevel=='4'}">해커</span>
-                        </li>
-                        <li class="liTit" th:if="${user.userSubSkill!=null}">
+                            </li>
+                            <li class="userSummryLi">
+                                <span>파 트</span><span class="spangray" th:text="${user.userMainSkill}"></span>
+                            </li>
+                            <li class="userSummryLi">
+                                <span>직 무</span><span class="spangray" th:text="${user.userMainDetail}"></span>
+                            </li>
+                            <li class="userSummryLi">
+                                <span>능력치</span>
+                                <span class="spangray" th:if="${user.userMainLevel=='1'}">초보</span>
+                                <span class="spangray" th:if="${user.userMainLevel=='2'}">중수</span>
+                                <span class="spangray" th:if="${user.userMainLevel=='3'}">고수</span>
+                                <span class="spangray" th:if="${user.userMainLevel=='4'}">해커</span>
+                            </li>
+                            <li class="liTit" th:if="${user.userSubSkill!=null}">
                             <span>
                                 <strong>[ 서브 캐릭터 ]</strong>
                             </span>
-                        </li>
-                        <li class="userSummryLi">
-                            <span>파 트</span><span class="spangray" th:text="${user.userSubSkill}"></span>
-                        </li>
-                        <li class="userSummryLi">
-                            <span>직 무</span><span class="spangray" th:text="${user.userSubDetail}"></span>
-                        </li>
-                        <li class="userSummryLi">
-                            <span>능력치</span>
-                            <span class="spangray" th:if="${user.userSubLevel=='1'}">초보</span>
-                            <span class="spangray" th:if="${user.userSubLevel=='2'}">중수</span>
-                            <span class="spangray" th:if="${user.userSubLevel=='3'}">고수</span>
-                            <span class="spangray" th:if="${user.userSubLevel=='4'}">해커</span>
-                        </li>
-                        <!-- 프로필 박스 -->
-                        <ul class="userSummryBoxUl">
-                            <li class="userSummryBoxLi">
-                                <span class="userBoxLiSpan">온/오프라인</span>
-                                <span th:if="${user.userOnOff=='0'}">온라인만 가능</span>
-                                <span th:if="${user.userOnOff=='1'}">오프라인만 가능</span>
-                                <span th:if="${user.userOnOff=='2'}">온/오프라인 모두가능</span>
                             </li>
-                            <li class="userSummryBoxLi">
-                                <span class="userBoxLiSpan">모임 장소</span>
-                                <span th:text="${user.userLocation}"></span>
+                            <li class="userSummryLi">
+                                <span>파 트</span><span class="spangray" th:text="${user.userSubSkill}"></span>
                             </li>
-                            <li class="userSummryBoxLi">
-                                <span class="userBoxLiSpan">모임 시간</span>
-                                <span>주중,주말 가능/시간대 미정</span>
+                            <li class="userSummryLi">
+                                <span>직 무</span><span class="spangray" th:text="${user.userSubDetail}"></span>
                             </li>
-                            <li class="userSummryBoxLi">
-                                <span class="userBoxLiSpan">관심 분야</span>
-                                <th:block th:each="inter : ${user.getInterests()}">
-                                    <span th:text="${inter.interest}"></span>
-                                </th:block>
+                            <li class="userSummryLi">
+                                <span>능력치</span>
+                                <span class="spangray" th:if="${user.userSubLevel=='1'}">초보</span>
+                                <span class="spangray" th:if="${user.userSubLevel=='2'}">중수</span>
+                                <span class="spangray" th:if="${user.userSubLevel=='3'}">고수</span>
+                                <span class="spangray" th:if="${user.userSubLevel=='4'}">해커</span>
                             </li>
-                            <li class="userSummryBoxLi">
-                                <span class="userBoxLiSpan">대화 포인트</span>
-                                <span th:text="${user.userPrice}+' 비트'"></span>
+                            <!-- 프로필 박스 -->
+                            <ul class="userSummryBoxUl">
+                                <li class="userSummryBoxLi">
+                                    <span class="userBoxLiSpan">온/오프라인</span>
+                                    <span th:if="${user.userOnOff=='0'}">온라인만 가능</span>
+                                    <span th:if="${user.userOnOff=='1'}">오프라인만 가능</span>
+                                    <span th:if="${user.userOnOff=='2'}">온/오프라인 모두가능</span>
+                                </li>
+                                <li class="userSummryBoxLi">
+                                    <span class="userBoxLiSpan">모임 장소</span>
+                                    <span th:text="${user.userLocation}"></span>
+                                </li>
+                                <li class="userSummryBoxLi">
+                                    <span class="userBoxLiSpan">모임 시간</span>
+                                    <span>주중,주말 가능/시간대 미정</span>
+                                </li>
+                                <li class="userSummryBoxLi">
+                                    <span class="userBoxLiSpan">관심 분야</span>
+                                    <th:block th:each="inter : ${user.getInterests()}">
+                                        <span th:text="${inter.interest}"></span>
+                                    </th:block>
+                                </li>
+                                <li class="userSummryBoxLi">
+                                    <span class="userBoxLiSpan">대화 포인트</span>
+                                    <span th:text="${user.userPrice}+' 비트'"></span>
+                                </li>
+                            </ul>
+                            <!-- 여기까지 프로필박스 -->
+
+                            <li class="userSummryTxt">
+                                <span class="userSummryTxtSpan">소 개</span>
+                                <p class="userSummryPtag">내용이 없습니다.</p>
+                            </li>
+                            <li class="userSummryTxtTag">
+                                <span class="userSummryTagWrap">태 그</span>
+                                <div class="profileKeywordWrap">
+                                    <th:block th:each="tag:${user.getTags()}">
+                                        <div class="keywordTag">
+                                            <span th:text="'#'+${tag.getTagName()}"></span>
+                                        </div>
+                                    </th:block>
+                                </div>
                             </li>
                         </ul>
-                        <!-- 여기까지 프로필박스 -->
-                        
-                        <li class="userSummryTxt">
-                            <span class="userSummryTxtSpan">소 개</span>
-                            <p class="userSummryPtag">내용이 없습니다.</p>
-                        </li>
-                        <li class="userSummryTxtTag">
-                            <span class="userSummryTagWrap">태 그</span>
-                            <div class="profileKeywordWrap">
-                                <th:block th:each="tag:${user.getTags()}">
-                                <div class="keywordTag">
-                                    <span th:text="'#'+${tag.getTagName()}"></span>
-                                </div>
-                                </th:block>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 여기까지 유저 정보 -->
-            <!-- 진행중인 프로젝트 -->
-            <div class="ingProject">
-                <p class="userFollowerTit">진행중인 프로젝트/스터디</p>
-                <div class="ingProjectWrap">
-                   <!-- 복사 -->
-                    <th:block th:each="project : ${user.getProjects()}">
-                    <div class="projectGridWrap">
-                        <div class="projectTopInfo">
-                            <div class="topInfo">
-                                <div class="box-wrap">
-                                    <div class="box green">
-                                        <span>NEW</span>
-                                    </div>
-                                    <div class="box black">
-                                        <span>사이드프로젝트</span>
-                                    </div>
-                                </div>
-                                <div class="favorite"></div>
-                            </div>
-                            <div class="projectImg">
-                                <img th:if="${project.projectImgPath == null}"
-                                     th:src="'/images/'+${project.projectImg}">
-                                <img th:unless="${project.projectImgPath == null}"
-                                     th:src="'/project/display?fileName='+ ${project.projectImgPath} + '/' + ${project.projectImgUuid} + '_' + ${project.projectImg}">
-                            </div>
-                        </div>
-                        <div class="projectMiddleInfo">
-                            <p class="category" th:text="${project.projectPart}"></p>
-                            <p class="categoryText" th:text="'['+${project.projectLocation}+'] '+${project.projectName}"></p>
-                        </div>
-                        <div class="projectBottomInfo">
-                            <div class="middleWrap">
-                                <div class="left">
-                                    <div class="heart">
-                                        <img src="https://letspl.me/assets/images/ic-favorite-empty-white.svg">
-                                        <span class="heartCount">0</span>
-                                    </div>
-                                </div>
-                                <div class="right">
-                                    <div>
-                                        <span th:text="${project.projectReadCount}"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bottomWrap">
-                                <div class="recruit">
-                                    <div class="recruitStatus">
-                                        <span>참여일 : 22.04.08</span>
-                                    </div>
-                                    <div class="recruitModel">
-                                        <ul>
-                                            <th:block th:each="person : ${project.persons}">
-                                            <li>
-                                                <span th:text="${person.projectSubSkill}"></span>
-                                                <span th:text="${person.projectCount}"></span>
-                                            </li>
-                                            </th:block>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    </th:block>
-                    <!-- 여기까지 -->
-             
-     
+                </div>
+
+                <!-- 여기까지 유저 정보 -->
+                <!-- 진행중인 프로젝트 -->
+                <div class="ingProject">
+                    <p class="userFollowerTit">진행중인 프로젝트/스터디</p>
+                    <div class="ingProjectWrap">
+                        <!-- 복사 -->
+                        <th:block th:each="project : ${user.getProjects()}">
+                            <div class="projectGridWrap">
+                                <div class="projectTopInfo">
+                                    <div class="topInfo">
+                                        <div class="box-wrap">
+                                            <div class="box green">
+                                                <span>NEW</span>
+                                            </div>
+                                            <div class="box black">
+                                                <span>사이드프로젝트</span>
+                                            </div>
+                                        </div>
+                                        <div class="favorite"></div>
+                                    </div>
+                                    <div class="projectImg">
+                                        <img th:if="${project.projectImgPath == null}"
+                                             th:src="'/images/'+${project.projectImg}">
+                                        <img th:unless="${project.projectImgPath == null}"
+                                             th:src="'/project/display?fileName='+ ${project.projectImgPath} + '/' + ${project.projectImgUuid} + '_' + ${project.projectImg}">
+                                    </div>
+                                </div>
+                                <div class="projectMiddleInfo">
+                                    <p class="category" th:text="${project.projectPart}"></p>
+                                    <p class="categoryText"
+                                       th:text="'['+${project.projectLocation}+'] '+${project.projectName}"></p>
+                                </div>
+                                <div class="projectBottomInfo">
+                                    <div class="middleWrap">
+                                        <div class="left">
+                                            <div class="heart">
+                                                <img src="https://letspl.me/assets/images/ic-favorite-empty-white.svg">
+                                                <span class="heartCount">0</span>
+                                            </div>
+                                        </div>
+                                        <div class="right">
+                                            <div>
+                                                <span th:text="${project.projectReadCount}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bottomWrap">
+                                        <div class="recruit">
+                                            <div class="recruitStatus">
+                                                <span>참여일 : 22.04.08</span>
+                                            </div>
+                                            <div class="recruitModel">
+                                                <ul>
+                                                    <th:block th:each="person : ${project.persons}">
+                                                        <li>
+                                                            <span th:text="${person.projectSubSkill}"></span>
+                                                            <span th:text="${person.projectCount}"></span>
+                                                        </li>
+                                                    </th:block>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </th:block>
+                        <!-- 여기까지 -->
+
+
+                    </div>
+                </div>
+
+                <!-- 나를 구독중인-->
+                <div class="userFollower">
+                    <li class="userFollowerWrap">
+                        <p class="userFollowerTit">
+                            박상아님을 구독중인 워크인<span><strong>1</strong></span>명
+                        </p>
+                        <ul class="userFollowerImg">
+                            <li class="userFollowerImgs">
+                                <!-- 이미지위에 이름 뜨는 부분 -->
+                                <div class="hoverName">
+                                    <a href="/people/한서현">
+                                        <p>
+                                            <span>[L5]</span>
+                                            <span>한서현</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div class="followerImg">
+                                    <img src="/images/여.png">
+                                </div>
+                            </li>
+                            <li class="userFollowerImgs">
+                                <!-- 이미지위에 이름 뜨는 부분 -->
+                                <div class="hoverName">
+                                    <a href="/people/한서현">
+                                        <p>
+                                            <span>[L5]</span>
+                                            <span>한서현</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div class="followerImg">
+                                    <img src="/images/여.png">
+                                </div>
+                            </li>
+                            <li class="userFollowerImgs">
+                                <!-- 이미지위에 이름 뜨는 부분 -->
+                                <div class="hoverName">
+                                    <a href="/people/한서현">
+                                        <p>
+                                            <span>[L5]</span>
+                                            <span>한서현</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div class="followerImg">
+                                    <img src="/images/여.png">
+                                </div>
+                            </li>
+                            <li class="userFollowerImgs">
+                                <!-- 이미지위에 이름 뜨는 부분 -->
+                                <div class="hoverName">
+                                    <a href="/people/한서현">
+                                        <p>
+                                            <span>[L5]</span>
+                                            <span>한서현</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div class="followerImg">
+                                    <img src="/images/여.png">
+                                </div>
+                            </li>
+                            <li class="userFollowerImgs">
+                                <!-- 이미지위에 이름 뜨는 부분 -->
+                                <div class="hoverName">
+                                    <a href="/people/한서현">
+                                        <p>
+                                            <span>[L5]</span>
+                                            <span>한서현</span>
+                                        </p>
+                                    </a>
+                                </div>
+                                <div class="followerImg">
+                                    <img src="/images/여.png">
+                                </div>
+                            </li>
+
+                        </ul>
+                    </li>
                 </div>
             </div>
-
-            <!-- 나를 구독중인-->
-            <div class="userFollower">
-                <li class="userFollowerWrap">
-                    <p class="userFollowerTit">
-                        박상아님을 구독중인 워크인<span><strong>1</strong></span>명
-                    </p>
-                    <ul class="userFollowerImg">
-                        <li class="userFollowerImgs">
-                            <!-- 이미지위에 이름 뜨는 부분 -->
-                            <div class="hoverName">
-                                <a href="/people/한서현">
-                                    <p>
-                                        <span>[L5]</span>
-                                        <span>한서현</span>
-                                    </p>
-                                </a>
-                            </div>
-                            <div class="followerImg">
-                                <img src="/images/여.png">
-                            </div> 
-                        </li>
-                        <li class="userFollowerImgs">
-                            <!-- 이미지위에 이름 뜨는 부분 -->
-                            <div class="hoverName">
-                                <a href="/people/한서현">
-                                    <p>
-                                        <span>[L5]</span>
-                                        <span>한서현</span>
-                                    </p>
-                                </a>
-                            </div>
-                            <div class="followerImg">
-                                <img src="/images/여.png">
-                            </div>
-                        </li>
-                        <li class="userFollowerImgs">
-                            <!-- 이미지위에 이름 뜨는 부분 -->
-                            <div class="hoverName">
-                                <a href="/people/한서현">
-                                    <p>
-                                        <span>[L5]</span>
-                                        <span>한서현</span>
-                                    </p>
-                                </a>
-                            </div>
-                            <div class="followerImg">
-                                <img src="/images/여.png">
-                            </div>
-                        </li>
-                        <li class="userFollowerImgs">
-                            <!-- 이미지위에 이름 뜨는 부분 -->
-                            <div class="hoverName">
-                                <a href="/people/한서현">
-                                    <p>
-                                        <span>[L5]</span>
-                                        <span>한서현</span>
-                                    </p>
-                                </a>
-                            </div>
-                            <div class="followerImg">
-                                <img src="/images/여.png">
-                            </div>
-                        </li>
-                        <li class="userFollowerImgs">
-                            <!-- 이미지위에 이름 뜨는 부분 -->
-                            <div class="hoverName">
-                                <a href="/people/한서현">
-                                    <p>
-                                        <span>[L5]</span>
-                                        <span>한서현</span>
-                                    </p>
-                                </a>
-                            </div>
-                            <div class="followerImg">
-                                <img src="/images/여.png">
-                            </div>
-                        </li>
-
-                    </ul>
-                </li>
-            </div>
-        </div>
 
 
             <div class="userStroyTab activePage">
@@ -326,7 +328,7 @@
                                             <div class="timeLineTagWrap">
                                                 <span>#상아에요</span><span>#상아태그</span><span>#상혁준형</span><span>#서현승근</span><span>#화이팅</span>
 
-                                               
+
                                             </div>
                                         </div>
                                     </div>
@@ -372,224 +374,224 @@
                         <p>박상아님과 비슷한 프로필을 추천드려요</p>
                     </div>
                     <div class="samePeopleContents">
-                                <div class="userGrid">
-                                    <div class="userGridtop">
-                                        <div class="userIn" style="display: flex;">
-                                            <div class="userGridimg">
-                                                <img src="/images/여.png" style="width: 50px; object-fit: cover;">
-                                            </div>
-                                        </div>
-                
-                                        <div class="usertool">
-                                            <div class="user1">
-                                                <div class="userLvIcon">
-                                                    <img  class="lvIcon" src="/images/level_6.png">
-                                                </div>
-                                                <div class="userGridName">
-                                                    <p class="ugname">박상아</p>
-                                                </div>
-                                                <div class="usercheckIcon">
-                                                    <img class="checkIcon" src="/images/ic-certi-red.png">
-                                                </div>
-                                            </div>
-                                            <div class="user2">
-                                                <p class="user2Ptag">웹 서버</p>
-                                            </div>
-                                        </div>
+                        <div class="userGrid">
+                            <div class="userGridtop">
+                                <div class="userIn" style="display: flex;">
+                                    <div class="userGridimg">
+                                        <img src="/images/여.png" style="width: 50px; object-fit: cover;">
                                     </div>
-                                    <div class="sameBoxBottom"> 
-                                        <p>#IT</p>
-                                        <p>#UIUX</p>
-                                        <p>#프론트</p>
-                                </div>
-                
                                 </div>
 
-                                <!-- 여기까지 한개 -->
-                                <div class="userGrid">
-                                    <div class="userGridtop">
-                                        <div class="userIn" style="display: flex;">
-                                            <div class="userGridimg">
-                                                <img src="/images/여.png" style="width: 50px; object-fit: cover;">
-                                            </div>
+                                <div class="usertool">
+                                    <div class="user1">
+                                        <div class="userLvIcon">
+                                            <img class="lvIcon" src="/images/level_6.png">
                                         </div>
-                
-                                        <div class="usertool">
-                                            <div class="user1">
-                                                <div class="userLvIcon">
-                                                    <img  class="lvIcon" src="/images/level_6.png">
-                                                </div>
-                                                <div class="userGridName">
-                                                    <p class="ugname">박상아</p>
-                                                </div>
-                                                <div class="usercheckIcon">
-                                                    <img class="checkIcon" src="/images/ic-certi-red.png">
-                                                </div>
-                                            </div>
-                                            <div class="user2">
-                                                <p class="user2Ptag">웹 서버</p>
-                                            </div>
+                                        <div class="userGridName">
+                                            <p class="ugname">박상아</p>
+                                        </div>
+                                        <div class="usercheckIcon">
+                                            <img class="checkIcon" src="/images/ic-certi-red.png">
                                         </div>
                                     </div>
-                                    <div class="sameBoxBottom"> 
-                                            <p>#IT</p>
-                                            <p>#UIUX</p>
-                                            <p>#프론트</p>
-                                            <p>#디자인</p>
-                                            <p>#기획</p>
+                                    <div class="user2">
+                                        <p class="user2Ptag">웹 서버</p>
                                     </div>
                                 </div>
-                                <!-- 여기까지 한개 -->
-                                <div class="userGrid">
-                                    <div class="userGridtop">
-                                        <div class="userIn" style="display: flex;">
-                                            <div class="userGridimg">
-                                                <img src="/images/여.png" style="width: 50px; object-fit: cover;">
-                                            </div>
-                                        </div>
-                
-                                        <div class="usertool">
-                                            <div class="user1">
-                                                <div class="userLvIcon">
-                                                    <img  class="lvIcon" src="/images/level_6.png">
-                                                </div>
-                                                <div class="userGridName">
-                                                    <p class="ugname">박상아</p>
-                                                </div>
-                                                <div class="usercheckIcon">
-                                                    <img class="checkIcon" src="/images/ic-certi-red.png">
-                                                </div>
-                                            </div>
-                                            <div class="user2">
-                                                <p class="user2Ptag">웹 서버</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="sameBoxBottom"> 
-                                            <p>#IT</p>
-                                            <p>#UIUX</p>
-                                            <p>#프론트</p>
-                                            <p>#디자인</p>
-                                            <p>#기획</p>
+                            </div>
+                            <div class="sameBoxBottom">
+                                <p>#IT</p>
+                                <p>#UIUX</p>
+                                <p>#프론트</p>
+                            </div>
+
+                        </div>
+
+                        <!-- 여기까지 한개 -->
+                        <div class="userGrid">
+                            <div class="userGridtop">
+                                <div class="userIn" style="display: flex;">
+                                    <div class="userGridimg">
+                                        <img src="/images/여.png" style="width: 50px; object-fit: cover;">
                                     </div>
                                 </div>
-                                <!-- 여기까지 한개 -->
-                                <div class="userGrid">
-                                    <div class="userGridtop">
-                                        <div class="userIn" style="display: flex;">
-                                            <div class="userGridimg">
-                                                <img src="/images/여.png" style="width: 50px; object-fit: cover;">
-                                            </div>
+
+                                <div class="usertool">
+                                    <div class="user1">
+                                        <div class="userLvIcon">
+                                            <img class="lvIcon" src="/images/level_6.png">
                                         </div>
-                
-                                        <div class="usertool">
-                                            <div class="user1">
-                                                <div class="userLvIcon">
-                                                    <img  class="lvIcon" src="/images/level_6.png">
-                                                </div>
-                                                <div class="userGridName">
-                                                    <p class="ugname">박상아</p>
-                                                </div>
-                                                <div class="usercheckIcon">
-                                                    <img class="checkIcon" src="/images/ic-certi-red.png">
-                                                </div>
-                                            </div>
-                                            <div class="user2">
-                                                <p class="user2Ptag">웹 서버</p>
-                                            </div>
+                                        <div class="userGridName">
+                                            <p class="ugname">박상아</p>
+                                        </div>
+                                        <div class="usercheckIcon">
+                                            <img class="checkIcon" src="/images/ic-certi-red.png">
                                         </div>
                                     </div>
-                                    <div class="sameBoxBottom"> 
-                                            <p>#IT</p>
-                                            <p>#UIUX</p>
-                                            <p>#프론트</p>
-                                            <p>#디자인</p>
-                                            <p>#기획</p>
+                                    <div class="user2">
+                                        <p class="user2Ptag">웹 서버</p>
                                     </div>
                                 </div>
-                                <!-- 여기까지 한개 -->
-                                <div class="userGrid">
-                                    <div class="userGridtop">
-                                        <div class="userIn" style="display: flex;">
-                                            <div class="userGridimg">
-                                                <img src="/images/여.png" style="width: 50px; object-fit: cover;">
-                                            </div>
-                                        </div>
-                
-                                        <div class="usertool">
-                                            <div class="user1">
-                                                <div class="userLvIcon">
-                                                    <img  class="lvIcon" src="/images/level_6.png">
-                                                </div>
-                                                <div class="userGridName">
-                                                    <p class="ugname">박상아</p>
-                                                </div>
-                                                <div class="usercheckIcon">
-                                                    <img class="checkIcon" src="/images/ic-certi-red.png">
-                                                </div>
-                                            </div>
-                                            <div class="user2">
-                                                <p class="user2Ptag">웹 서버</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="sameBoxBottom"> 
-                                            <p>#IT</p>
-                                            <p>#UIUX</p>
-                                            <p>#프론트</p>
-                                            <p>#디자인</p>
-                                            <p>#기획</p>
+                            </div>
+                            <div class="sameBoxBottom">
+                                <p>#IT</p>
+                                <p>#UIUX</p>
+                                <p>#프론트</p>
+                                <p>#디자인</p>
+                                <p>#기획</p>
+                            </div>
+                        </div>
+                        <!-- 여기까지 한개 -->
+                        <div class="userGrid">
+                            <div class="userGridtop">
+                                <div class="userIn" style="display: flex;">
+                                    <div class="userGridimg">
+                                        <img src="/images/여.png" style="width: 50px; object-fit: cover;">
                                     </div>
                                 </div>
-                                <!-- 여기까지 한개 -->
-                                <div class="userGrid">
-                                    <div class="userGridtop">
-                                        <div class="userIn" style="display: flex;">
-                                            <div class="userGridimg">
-                                                <img src="/images/여.png" style="width: 50px; object-fit: cover;">
-                                            </div>
+
+                                <div class="usertool">
+                                    <div class="user1">
+                                        <div class="userLvIcon">
+                                            <img class="lvIcon" src="/images/level_6.png">
                                         </div>
-                
-                                        <div class="usertool">
-                                            <div class="user1">
-                                                <div class="userLvIcon">
-                                                    <img  class="lvIcon" src="/images/level_6.png">
-                                                </div>
-                                                <div class="userGridName">
-                                                    <p class="ugname">박상아</p>
-                                                </div>
-                                                <div class="usercheckIcon">
-                                                    <img class="checkIcon" src="/images/ic-certi-red.png">
-                                                </div>
-                                            </div>
-                                            <div class="user2">
-                                                <p class="user2Ptag">웹 서버</p>
-                                            </div>
+                                        <div class="userGridName">
+                                            <p class="ugname">박상아</p>
+                                        </div>
+                                        <div class="usercheckIcon">
+                                            <img class="checkIcon" src="/images/ic-certi-red.png">
                                         </div>
                                     </div>
-                                    <div class="sameBoxBottom"> 
-                                            <p>#IT</p>
-                                            <p>#UIUX</p>
-                                            <p>#프론트</p>
-                                            <p>#디자인</p>
-                                            <p>#기획</p>
+                                    <div class="user2">
+                                        <p class="user2Ptag">웹 서버</p>
                                     </div>
                                 </div>
-                                <!-- 여기까지 한개 -->
-                            
-                 
-                
+                            </div>
+                            <div class="sameBoxBottom">
+                                <p>#IT</p>
+                                <p>#UIUX</p>
+                                <p>#프론트</p>
+                                <p>#디자인</p>
+                                <p>#기획</p>
+                            </div>
+                        </div>
+                        <!-- 여기까지 한개 -->
+                        <div class="userGrid">
+                            <div class="userGridtop">
+                                <div class="userIn" style="display: flex;">
+                                    <div class="userGridimg">
+                                        <img src="/images/여.png" style="width: 50px; object-fit: cover;">
+                                    </div>
+                                </div>
+
+                                <div class="usertool">
+                                    <div class="user1">
+                                        <div class="userLvIcon">
+                                            <img class="lvIcon" src="/images/level_6.png">
+                                        </div>
+                                        <div class="userGridName">
+                                            <p class="ugname">박상아</p>
+                                        </div>
+                                        <div class="usercheckIcon">
+                                            <img class="checkIcon" src="/images/ic-certi-red.png">
+                                        </div>
+                                    </div>
+                                    <div class="user2">
+                                        <p class="user2Ptag">웹 서버</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sameBoxBottom">
+                                <p>#IT</p>
+                                <p>#UIUX</p>
+                                <p>#프론트</p>
+                                <p>#디자인</p>
+                                <p>#기획</p>
+                            </div>
+                        </div>
+                        <!-- 여기까지 한개 -->
+                        <div class="userGrid">
+                            <div class="userGridtop">
+                                <div class="userIn" style="display: flex;">
+                                    <div class="userGridimg">
+                                        <img src="/images/여.png" style="width: 50px; object-fit: cover;">
+                                    </div>
+                                </div>
+
+                                <div class="usertool">
+                                    <div class="user1">
+                                        <div class="userLvIcon">
+                                            <img class="lvIcon" src="/images/level_6.png">
+                                        </div>
+                                        <div class="userGridName">
+                                            <p class="ugname">박상아</p>
+                                        </div>
+                                        <div class="usercheckIcon">
+                                            <img class="checkIcon" src="/images/ic-certi-red.png">
+                                        </div>
+                                    </div>
+                                    <div class="user2">
+                                        <p class="user2Ptag">웹 서버</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sameBoxBottom">
+                                <p>#IT</p>
+                                <p>#UIUX</p>
+                                <p>#프론트</p>
+                                <p>#디자인</p>
+                                <p>#기획</p>
+                            </div>
+                        </div>
+                        <!-- 여기까지 한개 -->
+                        <div class="userGrid">
+                            <div class="userGridtop">
+                                <div class="userIn" style="display: flex;">
+                                    <div class="userGridimg">
+                                        <img src="/images/여.png" style="width: 50px; object-fit: cover;">
+                                    </div>
+                                </div>
+
+                                <div class="usertool">
+                                    <div class="user1">
+                                        <div class="userLvIcon">
+                                            <img class="lvIcon" src="/images/level_6.png">
+                                        </div>
+                                        <div class="userGridName">
+                                            <p class="ugname">박상아</p>
+                                        </div>
+                                        <div class="usercheckIcon">
+                                            <img class="checkIcon" src="/images/ic-certi-red.png">
+                                        </div>
+                                    </div>
+                                    <div class="user2">
+                                        <p class="user2Ptag">웹 서버</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sameBoxBottom">
+                                <p>#IT</p>
+                                <p>#UIUX</p>
+                                <p>#프론트</p>
+                                <p>#디자인</p>
+                                <p>#기획</p>
+                            </div>
+                        </div>
+                        <!-- 여기까지 한개 -->
+
+
                     </div>
                 </div>
             </div>
         </div>
-      </div>   
-    </section>
-    <th:block th:insert="/fix/chat.html :: sideFragment"/>
-    <th:block th:insert="/fix/footer.html :: footerFragment"/>
+    </div>
+</section>
+<th:block th:insert="/fix/chat.html :: sideFragment"/>
+<th:block th:insert="/fix/footer.html :: footerFragment"/>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/js/header.js"></script>
 <script src="/js/chat.js"></script>
+
 <script src="/js/userview.js"></script>
 </html>

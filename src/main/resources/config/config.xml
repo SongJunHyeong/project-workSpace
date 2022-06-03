@@ -2,12 +2,18 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0/EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
+        <typeAlias type="com.project.workspace.domain.vo.ChatMessageVO" alias="chatMessageVO"/>
+        <typeAlias type="com.project.workspace.domain.vo.ChatMessageMyBatisVO" alias="chatMessageMyBatisVO"/>
+        <typeAlias type="com.project.workspace.domain.vo.ProjectVO" alias="projectVO"/>
+        <typeAlias type="com.project.workspace.domain.vo.StudyVO" alias="studyVO"/>
+        <typeAlias type="com.project.workspace.domain.vo.StudyKeywordVO" alias="studyKeywordVO"/>
+        <typeAlias type="com.project.workspace.domain.vo.StudyMemberVO" alias="studyMemberVO"/>
         <typeAlias type="com.project.workspace.domain.vo.UserVO" alias="userVO"/>
         <typeAlias type="com.project.workspace.domain.vo.UserPortfolioVO" alias="userPortfolioVO"/>
         <typeAlias type="com.project.workspace.domain.vo.UserTagVO" alias="userTagVO"/>
         <typeAlias type="com.project.workspace.domain.vo.UserInterestVO" alias="userInterestVO"/>
-        <typeAlias type="com.project.workspace.domain.vo.UserAlertVO" alias="userAlertVO"/>
         <typeAlias type="com.project.workspace.domain.vo.UserFollowVO" alias="userFollowVO"/>
+        <typeAlias type="com.project.workspace.domain.vo.UserAlertVO" alias="userAlertVO"/>
         <typeAlias type="com.project.workspace.domain.vo.StudyVO" alias="studyVO"/>
         <typeAlias type="com.project.workspace.domain.vo.StudyKeywordVO" alias="studyKeywordVO"/>
         <typeAlias type="com.project.workspace.domain.vo.StudyMemberVO" alias="studyMemberVO"/>

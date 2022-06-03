@@ -48,8 +48,9 @@ public class LoungeReplyVO {
     private UserVO userVO;
 
     @Builder
-    public LoungeReplyVO(String loungeReplyContent, String loungeReplyDate, LoungeVO loungeVO, UserVO userVO) {
+    public LoungeReplyVO(Long loungeReplyNum, String loungeReplyContent, String loungeReplyDate, LoungeVO loungeVO, UserVO userVO) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        this.loungeReplyNum = loungeReplyNum;
         this.loungeReplyContent = loungeReplyContent;
         try {
             if(loungeReplyDate!=null){this.loungeReplyDate = sdf.parse(loungeReplyDate);}

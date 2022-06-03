@@ -1,5 +1,6 @@
 package com.project.workspace.domain.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +20,7 @@ public class StoryTagVO {
     @Column(name = "tag_name")
     private String tagName;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "story_num")
     private StoryVO storyVO;

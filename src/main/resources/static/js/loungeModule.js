@@ -6,7 +6,7 @@ let loungeService = (function () {
             url:"/lounge/reply/" + loungeNum,
             success: function (loungeReplyDTO) {
                 if (callback) {
-                    callback(loungeReplyDTO.userNickNames, loungeReplyDTO.replies);
+                    callback(loungeReplyDTO.userVO, loungeReplyDTO.replies);
                 }
             },
             error: function (xhr, status, error) {
@@ -59,6 +59,24 @@ let loungeService = (function () {
             },
             error: function (xhr, status, error) {
                 if (error) {
+                    alert("실패");
+                }
+            }
+        })
+    }
+
+    function deleteReply(loungeReplyNum, callback) {
+        $.ajax({
+            type:"GET",
+            url:"/lounge/loungeDeleteReply/"+ loungeReplyNum,
+            success: function (result) {
+                if (callback) {
+                    callback(result);
+                }
+            },
+            error: function (xhr, status, error) {
+                if (error) {
+                    alert("실패");
                 }
             }
         })
@@ -80,5 +98,21 @@ let loungeService = (function () {
         })
     }
 
-    return {getList: getList, insertLounge:insertLounge, insertReply:insertReply, deleteLounge:deleteLounge, updateLounge:updateLounge}
+    function updateReply(param, callback) {
+        $.ajax({
+            type:"GET",
+            url:"/lounge/loungeUpdateReply/"+ param.loungeReplyNum +"/" + param.loungeReplyContent,
+            success: function (result) {
+                if (callback) {
+                    callback(result);
+                }
+            },
+            error: function (xhr, status, error) {
+                if (error) {
+                }
+            }
+        })
+    }
+
+    return {getList: getList, insertLounge:insertLounge, insertReply:insertReply, deleteLounge:deleteLounge, updateLounge:updateLounge,updateReply:updateReply,deleteReply:deleteReply}
 })();

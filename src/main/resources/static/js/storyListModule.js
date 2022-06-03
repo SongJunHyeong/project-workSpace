@@ -24,7 +24,7 @@ let storyService = (function () {
             url:"/story/getList/" + storyNum,
             success: function (loungeReplyDTO) {
                 if (callback) {
-                    callback(loungeReplyDTO.userNickNames, loungeReplyDTO.replies);
+                    callback(loungeReplyDTO.userVOs, loungeReplyDTO.replies);
                 }
             },
             error: function (xhr, status, error) {
@@ -38,6 +38,38 @@ let storyService = (function () {
         $.ajax({
             type:"GET",
             url:"/story/storyInsert/"+ param.storyReply + "/" + param.userNum + "/" + param.storyNum,
+            success: function (result) {
+                if (callback) {
+                    callback(result);
+                }
+            },
+            error: function (xhr, status, error) {
+                if (error) {
+                }
+            }
+        })
+    }
+
+    function updateReply(param, callback) {
+        $.ajax({
+            type:"GET",
+            url:"/story/updateReply/"+ param.storyReplyNum + "/" + param.storyReply + "/" + param.userNum + "/" + param.storyNum,
+            success: function (result) {
+                if (callback) {
+                    callback(result);
+                }
+            },
+            error: function (xhr, status, error) {
+                if (error) {
+                }
+            }
+        })
+    }
+
+    function deleteReply(storyReplyNum, callback) {
+        $.ajax({
+            type:"GET",
+            url:"/story/deleteReply/"+ storyReplyNum,
             success: function (result) {
                 if (callback) {
                     callback(result);
@@ -66,5 +98,5 @@ let storyService = (function () {
         });
     }
 
-    return {selectList: selectList, getList:getList, insertReply:insertReply,resetReply:resetReply}
+    return {selectList: selectList, getList:getList, insertReply:insertReply,resetReply:resetReply, updateReply:updateReply, deleteReply:deleteReply}
 })();

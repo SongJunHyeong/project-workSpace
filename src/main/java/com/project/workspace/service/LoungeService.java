@@ -15,5 +15,7 @@ public interface LoungeService {
     public String insertLounge(String loungeContent, UserVO userNum);
     public String insertReply(String replyContent, UserVO userNum, LoungeVO loungeNum);
     public String deleteLounge(Long loungeNum);
+    public String deleteReply(Long loungeReplyNum);
     public String updateLounge(Long loungeNum, String loungeContent);
+    public String updateReply(Long loungeReplyNum, String loungeReplyContent);
 }

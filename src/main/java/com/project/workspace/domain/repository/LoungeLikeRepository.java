@@ -10,4 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface LoungeLikeRepository extends JpaRepository<LoungeLikeVO, Long> {
+    LoungeLikeVO findByUserVO_UserNumAndLoungeVO_LoungeNum(Long userNum, Long loungeNum);
+    void deleteByUserVO_UserNumAndLoungeVO_LoungeNum(Long userNum, Long loungeNum);
+    List<LoungeLikeVO> findAllByLoungeVO_LoungeNum(Long loungeNum);
 }

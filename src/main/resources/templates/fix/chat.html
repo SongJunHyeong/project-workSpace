@@ -1,115 +1,133 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="sideFragment">
+<th:block th:fragment="sideFragment" th:if="${session.userNum} and ${session.profile}">
     <side id="side">
         <div class="chattingWrap">
-    <div class="chattingOpen open"></div>
-    <div class="chatting">
-        <div class="chattingContentWrap">
-            <div class="chattingHeader">
-                <div class="left">
-                    <div class="foldChatButton"></div>
-                    <p>대화 목록</p>
-                </div>
-                <div class="right">
-                    <div class="chatterImg">
-                        <img src="https://letspl.me/assets/images/prof-no-img.png">
-                    </div>
-                    <div class="user">
-                        <p class="userId">
-                            에붸붸
-                            <span>[미접속]</span>
-                        </p>
-                        <div class="idMenu">
-                            <ul>
-                                <li>
-                                    <a href="#/people">프로필 상세</a>
-                                </li>
-                            </ul>
+            <div class="chattingOpen open"></div>
+            <div class="chatting">
+                <div class="chattingContentWrap">
+                    <div class="chattingHeader">
+                        <div class="left">
+                            <div class="foldChatButton"></div>
+                            <p>대화 목록</p>
+                            <input type="hidden" th:value="${session.profile.userNickName}" id="userNickName">
                         </div>
-                        <p class="lastTime">
-                        <span class="questionMore">
-                            <span class="questionHoverView">대화 없이 종료시, 지불 포인트의 100%가 환불됩니다!</span>
-                        </span>
-                            1일 18시 36분 남았습니다
-                        </p>
-                        <div class="moreAndFold">
-                            <div class="alarm"></div>
-                            <div class="fold"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="chattingSection">
-                <div class="chatList">
-                    <ul>
-                        <li class="active">
-                            <div class="chatImg">
-                                <img src="https://letspl.me/assets/iclogo_rec.png">
-                            </div>
-                            <div class="chatInfo">
-                                <span class="userIdAndBeforeTime">
-                                    <span class="chatter">오픈 챗</span>
-                                    <span class="beforeTime">6시간 전</span>
-                                </span>
-                                <p class="chatInfoText"></p>
-                                <p class="endTime">종료 : 종료기한없음</p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="chatImg">
+                        <div class="right">
+                            <div class="chatterImg">
                                 <img src="https://letspl.me/assets/images/prof-no-img.png">
                             </div>
-                            <div class="chatInfo">
-                                <span class="userIdAndBeforeTime">
-                                    <span class="chatter">홍승근</span>
-                                    <span class="beforeTime">6시간 전</span>
-                                </span>
-                                <p class="chatInfoText">ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ</p>
-                                <p class="endTime">종료 : 20.05.10 11:16</p>
+                            <div class="user">
+                                <p class="userId" id="chatId">
+                                    상대방 이름
+                                    <!--                                    <span>[미접속]</span>-->
+                                </p>
+                                <div class="idMenu">
+                                    <ul>
+                                        <li>
+                                            <a href="#/people">프로필 상세</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <p class="lastTime">
+                                    <!--                        <span class="questionMore">-->
+                                    <!--                            <span class="questionHoverView">대화 없이 종료시, 지불 포인트의 100%가 환불됩니다!</span>-->
+                                    <!--                        </span>-->
+                                    <!--                                    1일 18시 36분 남았습니다-->
+                                </p>
+                                <div class="moreAndFold">
+                                    <div class="alarm"></div>
+                                    <div class="fold" id="chatDelete"></div>
+                                </div>
                             </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="chattingRoom active">
-                    <div class="chattingRoomWrap">
-                        <div class="dayInfo">
-                            <p>
-                                22.05.03 화요일
-                            </p>
                         </div>
-                        <div class="userStatus">
-                            <p>
-                                상냥이님이 대화방을 개설하였습니다.
-                            </p>
-                        </div>
-                        <div class="userStatus">
-                            <p>
-                                홍승근님이 누구님을 초대하셨습니다.
-                            </p>
-                        </div>
-                        <div class="opponent">
-                            <div class="chatterImg">
-                                <a>
-                                    <img src="https://letspl.me/assets/images/prof-no-img.png">
-                                </a>
+                    </div>
+                    <div class="chattingSection">
+                        <div class="chatList">
+                            <div>
+                                <ul id="chatLists" style="margin-top: 20px;text-align: left">
+                                    <span style="margin-left: 24px;font-weight: bold;">채팅방 목록</span>
+                                    <ul id="chatList">
+                                    </ul>
+                                </ul>
                             </div>
-                            <div class="userIdChat">
-                                <span class="userId">홍승근</span>
-                                <p class="chatText">
+<!--                            <div style="width: 100%;">-->
+<!--                                <p id="ppp"></p>-->
+<!--                                <ul id="ulclass" style="">-->
+<!--                                    <span style="font-weight: bold;font-size: 17px;padding-left: 20px;">회원목록</span>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+
+
+                            <!--                            <ul>-->
+                            <!--                                <li class="active">-->
+                            <!--                                    <div class="chatImg">-->
+                            <!--                                        <img src="https://letspl.me/assets/iclogo_rec.png">-->
+                            <!--                                    </div>-->
+                            <!--                                    <div class="chatInfo">-->
+                            <!--                                <span class="userIdAndBeforeTime">-->
+                            <!--                                    <span class="chatter">오픈 챗</span>-->
+                            <!--                                    <span class="beforeTime">6시간 전</span>-->
+                            <!--                                </span>-->
+                            <!--                                        <p class="chatInfoText"></p>-->
+                            <!--                                        <p class="endTime">종료 : 종료기한없음</p>-->
+                            <!--                                    </div>-->
+                            <!--                                </li>-->
+
+
+                            <!--                                <li>-->
+                            <!--                                    <div class="chatImg">-->
+                            <!--                                        <img src="https://letspl.me/assets/images/prof-no-img.png">-->
+                            <!--                                    </div>-->
+                            <!--                                    <div class="chatInfo">-->
+                            <!--                                <span class="userIdAndBeforeTime">-->
+                            <!--                                    <span class="chatter">홍승근</span>-->
+                            <!--                                    <span class="beforeTime">6시간 전</span>-->
+                            <!--                                </span>-->
+                            <!--                                        <p class="chatInfoText">ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ</p>-->
+                            <!--                                        <p class="endTime">종료 : 20.05.10 11:16</p>-->
+                            <!--                                    </div>-->
+                            <!--                                </li>-->
+                            <!--                            </ul>-->
+                        </div>
+                        <div class="chattingRoom active" id="chatWrapSecond">
+                            <div class="chattingRoomWrap">
+                                <div class="dayInfo">
+                                    <p>
+                                        22.05.03 화요일
+                                    </p>
+                                </div>
+                                <div class="userStatus">
+                                    <p>
+                                        상냥이님이 대화방을 개설하였습니다.
+                                    </p>
+                                </div>
+                                <div class="userStatus">
+                                    <p>
+                                        홍승근님이 누구님을 초대하셨습니다.
+                                    </p>
+                                </div>
+                                <div class="opponent">
+                                    <div class="chatterImg">
+                                        <a>
+                                            <img src="https://letspl.me/assets/images/prof-no-img.png">
+                                        </a>
+                                    </div>
+                                    <div class="userIdChat">
+                                        <span class="userId">홍승근</span>
+                                        <p class="chatText">
                                     <span class="chatTextContents">
                                         안녕하세요
                                     </span>
-                                    <span class="time">오전 11:16</span>
-                                </p>
+                                            <span class="time">오전 11:16</span>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-        </side>
+    </side>
 </th:block>
 </html>

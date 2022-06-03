@@ -76,6 +76,7 @@
 
                     </ul>
                 </div>
+                <div class="line"></div>
             </div>
 
             <div class="line"></div>
@@ -118,7 +119,7 @@
                                         <span class="timeLintCategory" th:text="${allStory.getUserVO().getUserNickName()}"></span>
                                         <p class="timeLineTit" th:text="|[${allStory.getStoryPart}] ${allStory.getStoryTitle()}"|>[출시/업데이트] 워크스페이스 업데이트 완료</p>
                                     </div>
-                                    <div class="timeLineTxt" th:text="${allStory.getStoryContent()}">
+                                    <div class="timeLineTxt" th:utext="${allStory.getStoryContent()}">
                                     </div>
                                     <div class="timeLineTagWrap">
                                         <th:block th:each="tag:${allStory.getTags()}">

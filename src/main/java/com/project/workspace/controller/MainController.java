@@ -44,8 +44,8 @@ public class MainController {
 
         model.addAttribute("projectList",projectList);
     }
-    @GetMapping("/userDetail/{userNum}")
-    public String userDetail(@PathVariable("userNum") Long userNum, Model model){
+    @GetMapping("/userDetail")
+    public String userDetail(Long userNum, Model model){
         UserVO userVO = userRepository.getById(userNum);
         log.info(userVO.toString());
         model.addAttribute("user",userVO);

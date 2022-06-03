@@ -188,11 +188,11 @@ public class StoryController {
     public StoryReplyDTO getList(@PathVariable("storyNum") Long storyNum){
         StoryVO storyVO = storyRepository.findById(storyNum).get();
         List<StoryReplyVO> replies = storyVO.getReplies();
-        List<String> userNickNames = replies.stream().map(UserVO -> UserVO.getUserVO().getUserNickName()).collect(Collectors.toList());
-        Collections.reverse(userNickNames);
+        List<UserVO> userVOs = replies.stream().map(UserVO -> UserVO.getUserVO()).collect(Collectors.toList());
+        Collections.reverse(userVOs);
         Collections.reverse(replies);
 
-        return new StoryReplyDTO(userNickNames, replies);
+        return new StoryReplyDTO(userVOs, replies);
     }
 
     // 스토리 삭제
@@ -204,8 +204,34 @@ public class StoryController {
 
     @ResponseBody
     @GetMapping("/storyInsert/{storyReply}/{userNum}/{storyNum}")
-    public String insertReply(@PathVariable("storyReply") String storyReply, @PathVariable("userNum") UserVO userNum, @PathVariable("storyNum") StoryVO storyNum){
-        storyReplyRepository.save(StoryReplyVO.builder().storyVO(storyNum).userVO(userNum).storyReply(storyReply).build());
+    public String insertReply(@PathVariable("storyNum") Long storyNum, @PathVariable("userNum") Long userNum, @PathVariable("storyReply") String storyReply){
+        UserVO userVO = new UserVO();
+        userVO.setUserNum(userNum);
+        StoryVO storyVO = new StoryVO();
+        storyVO.setStoryNum(storyNum);
+
+        storyReplyRepository.save(StoryReplyVO.builder().userVO(userVO).storyVO(storyVO).storyReply(storyReply).build());
+        return "success";
+    }
+
+    @ResponseBody
+    @GetMapping("/updateReply/{storyReplyNum}/{storyReply}/{userNum}/{storyNum}")
+    public String updateReply(@PathVariable("storyReply") String storyReply,@PathVariable("storyNum") Long storyNum, @PathVariable("userNum") Long userNum, @PathVariable("storyReplyNum") Long storyReplyNum){
+        UserVO userVO = new UserVO();
+        userVO.setUserNum(userNum);
+        StoryVO storyVO = new StoryVO();
+        storyVO.setStoryNum(storyNum);
+
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        storyReplyRepository.save(StoryReplyVO.builder().storyReplyNum(storyReplyNum).userVO(userVO).storyVO(storyVO).replyTime(sdf.format(date)).storyReply(storyReply).build());
+        return "success";
+    }
+
+    @ResponseBody
+    @GetMapping("/deleteReply/{storyReplyNum}")
+    public String deleteReply(@PathVariable("storyReplyNum") Long storyReplyNum){
+        storyReplyRepository.deleteById(storyReplyNum);
         return "success";
     }
 

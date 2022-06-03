@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class StoryReplyDTO {
-    private List<String> userNickNames;
+    private List<UserVO> userVOs;
     private List<StoryReplyVO> replies;
 
     public StoryReplyDTO() {;}

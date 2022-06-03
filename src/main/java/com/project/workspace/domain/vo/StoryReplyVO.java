@@ -1,5 +1,6 @@
 package com.project.workspace.domain.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.Generated;
@@ -32,19 +33,21 @@ public class StoryReplyVO {
     @Column(name = "status")
     private String status;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_num")
     private UserVO userVO;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "story_num")
     private StoryVO storyVO;
 
     @Builder
-    public StoryReplyVO(String storyReply, String status, UserVO userVO, StoryVO storyVO, String replyTime) {
+    public StoryReplyVO(Long storyReplyNum, String storyReply, UserVO userVO, StoryVO storyVO, String replyTime) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        this.storyReplyNum = storyReplyNum;
         this.storyReply = storyReply;
-        this.status = status;
         this.userVO = userVO;
         this.storyVO = storyVO;
         try {

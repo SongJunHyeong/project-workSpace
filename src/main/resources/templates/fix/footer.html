@@ -33,10 +33,10 @@
             <div id="right" class="flex">
                 <ul>
                     <li class="title">바로가기</li>
-                    <li><a href="#">워크인</a></li>
-                    <li><a href="#">프로젝트</a></li>
-                    <li><a href="#">스토리</a></li>
-                    <li><a href="#">라운지</a></li>
+                    <li><a href="/main/userList">팀원찾기</a></li>
+                    <li><a href="/project/projectList">프로젝트/스터디</a></li>
+                    <li><a th:href="@{/story/storyList(userNum=${session.userNum})}">블로그</a></li>
+                    <li><a href="/lounge">라운지</a></li>
                 </ul>
                 <ul>
                     <li class="title">이용안내</li>

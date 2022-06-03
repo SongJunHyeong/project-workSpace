@@ -52,12 +52,29 @@ public class LoungeServiceImpl implements LoungeService{
     }
 
     @Override
+    public String deleteReply(Long loungeReplyNum) {
+        loungeReplyRepository.deleteById(loungeReplyNum);
+        return "success";
+    }
+
+    @Override
     public String updateLounge(Long loungeNum, String loungeContent) {
         UserVO userVO = loungeRepository.findById(loungeNum).get().getUserVO();
 
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         LoungeVO loungeVO= loungeRepository.save(LoungeVO.builder().loungeContent(loungeContent).loungeDate(sdf.format(date)).loungeNum(loungeNum).userVO(userVO).build());
+        return "success";
+    }
+
+    @Override
+    public String updateReply(Long loungeReplyNum, String loungeReplyContent) {
+        UserVO userVO = loungeReplyRepository.findById(loungeReplyNum).get().getUserVO();
+        LoungeVO loungeVO = loungeReplyRepository.findById(loungeReplyNum).get().getLoungeVO();
+
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        LoungeReplyVO loungeReplyVO = loungeReplyRepository.save(LoungeReplyVO.builder().loungeVO(loungeVO).loungeReplyNum(loungeReplyNum).loungeReplyContent(loungeReplyContent).userVO(userVO).loungeReplyDate(sdf.format(date)).build());
         return "success";
     }
 }

@@ -1,5 +1,5 @@
-let limit=12;
-let plusCount=1;
+let limit = 12;
+let plusCount = 1;
 
 $(".filters").each(function (i, filter) {
     $(filter).on("change", function () {
@@ -7,7 +7,7 @@ $(".filters").each(function (i, filter) {
         $($(".filter").get(i)).val($(this).val());
         formData.append("locationFilter", $($(".filter").get(0)).val());
         formData.append("skillFilter", $($(".filter").get(1)).val());
-        formData.append("limit", limit*plusCount);
+        formData.append("limit", limit * plusCount);
 
         $.ajax({
             url: "/main/userFilter",
@@ -24,10 +24,9 @@ $(".filters").each(function (i, filter) {
 })
 
 
-
-function userList(result){
-    let str=""
-    $(result).each(function (i,user) {
+function userList(result) {
+    let str = ""
+    $(result).each(function (i, user) {
         str += '<li class="userGrid">'
         str += '<img src="/images/letspler_new_mark.png" class="red">'
         str += '<div class="userGridtop">'
@@ -124,6 +123,22 @@ $(".idHoverMenu").on("mouseout", function () {
     $(this).css("display", "none");
 })
 
-$(".ugname").next().find("a").on("click",function(){
+$(".ugname").next().find("a").on("click", function () {
     console.log($(this).text());
 })
+
+
+//채팅 시작하기
+document.getElementById('startChat').addEventListener('click', function () {
+        other = document.getElementById('ugname').innerText;
+
+        document.querySelector('.chattingOpen').classList.remove("open");
+        document.querySelector('.chatting').classList.add("open");
+        console.log(document.getElementsByClassName('userId')[0].innerText)
+
+
+        처음대화(mysession, other);
+        document.getElementById('chatId').innerHTML = other;
+
+    }
+)

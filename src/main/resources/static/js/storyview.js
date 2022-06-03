@@ -18,6 +18,9 @@ $(".storyViewWrap").on("click", ".activeInputBtn", function (e) {
     if (userNum != null) {
         let storyReply = $(this).prev().val();
         let storyNum = $(".storyViewContentsWrap").data("num");
+        console.log($(this));
+        console.log(storyReply);
+        console.log(storyNum);
         if (!storyReply) {
             alert("댓글을 입력하세요");
             return;
@@ -25,7 +28,6 @@ $(".storyViewWrap").on("click", ".activeInputBtn", function (e) {
             storyService.insertReply({
                 storyReply: storyReply, userNum: userNum, storyNum: storyNum
             }, function (result) {
-                alert(result);
                 getList(storyNum);
                 storyService.resetReply(
                     storyNum, function (result) {
@@ -84,7 +86,7 @@ function getList(storyNum) {
 
     storyService.getList(
         storyNum
-        , function (userNickNames, replies) {
+        , function (userVOs, replies) {
 
             if (replies == null || replies.length == 0) {
                 str += "<div class='activeInput'>";
@@ -118,10 +120,10 @@ function getList(storyNum) {
                 str += "</div>";
                 str += "<div class='activeRight'>";
                 str += "<div class='activeProfile'>";
-                str += "<p class='activeProName'>" + userNickNames[i];
+                str += "<p class='activeProName'>" + userVOs[i].userNickName;
                 str += "<ul class='hoverUl'>";
                 str += "<li class='hoverLi'>";
-                str += "<a href='/main/userDetail/" + replies[i].storyReplyNum + "'>프로필 상세</a>";
+                str += "<a href='/main/userDetail/" + userVOs[i].userNum + "'>프로필 상세</a>";
                 str += "</li>";
                 str += "<li class='hoverLi'>";
                 str += "<a>1 : 1 대화</a>";
@@ -135,14 +137,19 @@ function getList(storyNum) {
                 str += "</div>";
                 str += "<div class='activeTxt'>";
                 str += "<textarea class='activeTextArea' maxlength='500' placeholder='댓글을 작성해주세요' rows='2' readonly>" + replies[i].storyReply + "</textarea>";
+                if (userNum == userVOs[i].userNum) {
+                    str += '<div class="replyBtnWraps">';
+                    str += '<p class="txtBtns modifys">수정</p>';
+                    str += '<div class="sell">｜</div>';
+                    str += '<p class="txtBtns removes">삭제</p>';
+                    str += "</div>";
+                }
                 str += "</div>";
                 str += "</div>";
                 str += "</div>";
                 str += "</div>";
                 str += "</div>";
             }
-
-            //로그인 검사해야함
 
             str += "<div class='activeInput'>";
             str += "<div class='activInputPro'>";
@@ -161,13 +168,68 @@ function getList(storyNum) {
         })
 }
 
-//댓글 수정,삭제
-// str += "<div class='replyBtnWraps'>";
-// str += "<p class='txtBtns modifys'>수정</p>";
-// str += '<div class="sell">｜</div>';
-// str += "<p class='txtBtns removes'>삭제</p>";
-// str += "<button class='activeInputBtns'>수정완료</button>";
-// str += "</div>";
+// 스토리 댓글 수정
+$(".rpyAtiveWrap").on("click", "p.modifys", function () {
+    if ($(this).hasClass("active") === false) {
+        $(this).parents("div.replyBtnWraps").prev().attr("readonly", false);
+        $(this).parents("div.replyBtnWraps").prev().addClass("modify");
+        $(this).addClass("active");
+        $(this).siblings("p.removes").addClass("active");
+        $(this).text("완료");
+        $(this).siblings("p.removes").text("취소");
+    } else {
+        let storyReplyNum = $(this).parents(".replyActive").data("num");
+        let storyReply = $(this).parents("div.replyBtnWraps").prev().val();
+        let storyNum = $(this).parents(".rpyAtiveWrap").prev().data("num");
+
+        storyService.updateReply({
+            storyReplyNum: storyReplyNum, storyReply: storyReply, userNum:userNum, storyNum:storyNum
+        }, function (result) {
+            $(".modalStory1").css("display", "block");
+        })
+    }
+})
+
+// 스토리 댓글 삭제
+$(".rpyAtiveWrap").on("click", "p.removes", function () {
+    let storyNum = $(this).parents(".rpyAtiveWrap").prev().data("num");
+
+    if ($(this).hasClass("active") === false) {
+        let storyReplyNum = $(this).parents(".replyActive").data("num");
+        storyService.deleteReply(
+            storyReplyNum
+            , function (result) {
+                $(".modalStory4").css('display', 'block');
+            })
+    } else {
+        getList(storyNum);
+    }
+})
+// 댓글 수정 확인 모달
+$(".mdBtnStoryBtn1").on("click",function () {
+    $(".modalStory1").css('display', 'none');
+    let storyNum = $(".storyViewContentsWrap").data("num");
+    getList(storyNum);
+})
+
+$(".xIcons1").on("click",function () {
+    $(".modalStory1").css('display', 'none');
+    let storyNum = $(".storyViewContentsWrap").data("num");
+    getList(storyNum);
+})
+
+// 댓글 삭제 확인 모달
+$(".mdBtnStoryBtn4").on("click",function () {
+    $(".modalStory4").css('display', 'none');
+    let storyNum = $(".storyViewContentsWrap").data("num");
+    getList(storyNum);
+})
+
+$(".xIcons4").on("click",function () {
+    $(".modalStory4").css('display', 'none');
+    let storyNum = $(".storyViewContentsWrap").data("num");
+    getList(storyNum);
+})
 
 $(".rpyAtiveWrap").on("click", ".noSessionId", function () {
     $(".modalWrapOpen").show();
@@ -194,9 +256,12 @@ $(".mdBtnRemoves").on("click", function () {
     })
 });
 
-$(".xBtns").on("click", function () {
+// 삭제 완료
+$(".mdBtnStoryBtn2").on("click", function () {
     location.href = "/story/storyList";
 });
+
+// 삭제 취소
 $(".xIcons3").on("click", function () {
     $("div.modalStory3").hide();
 });
